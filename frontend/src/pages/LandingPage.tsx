@@ -3,10 +3,14 @@ import { Droplets, Activity, Map, BarChart3, ShieldAlert, ArrowRight } from 'luc
 
 const LandingPage = () => {
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden">
-      {/* Background gradients */}
-      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-aqua-500/10 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-blue-600/10 blur-[120px] pointer-events-none" />
+    <div className="min-h-screen flex flex-col relative overflow-hidden bg-[var(--background)]">
+      {/* Dynamic Water-like Background Gradients */}
+      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-aqua-500/15 blur-[120px] pointer-events-none animate-blob" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-blue-600/15 blur-[120px] pointer-events-none animate-blob" style={{ animationDelay: '5s' }} />
+      <div className="absolute top-[30%] left-[30%] w-[40%] h-[40%] rounded-full bg-cyan-400/10 blur-[120px] pointer-events-none animate-blob" style={{ animationDelay: '10s' }} />
+      
+      {/* Overlay to give it a slightly shimmering underwater feel */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+')] opacity-20 mix-blend-overlay pointer-events-none"></div>
       
       {/* Navbar */}
       <nav className="w-full py-6 px-8 flex justify-between items-center z-10 glass-panel border-x-0 border-t-0 border-b-white/5">
