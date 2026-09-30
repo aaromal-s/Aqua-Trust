@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-50: #f0f4f8;
+  --color-navy-100: #d9e2ec;
+  --color-navy-200: #bcccdc;
+  --color-navy-300: #9fb3c8;
+  --color-navy-400: #829ab1;
+  --color-navy-500: #627d98;
+  --color-navy-600: #486581;
+  --color-navy-700: #334e68;
+  --color-navy-800: #243b53;
+  --color-navy-900: #102a43;
+  
+  --color-midnight: #0b132b;
+  
+  --color-aqua-50: #f0fbff;
+  --color-aqua-100: #e0f6ff;
+  --color-aqua-200: #bbedff;
+  --color-aqua-300: #84e1ff;
+  --color-aqua-400: #42caff;
+  --color-aqua-500: #16a8ff;
+  --color-aqua-600: #0085f3;
+  --color-aqua-700: #006ad8;
+  --color-aqua-800: #0055b1;
+  --color-aqua-900: #004892;
+  --color-aqua-950: #002c5c;
+}
+
+@layer base {
+  :root {
+    --background: #060b19;
+    --foreground: #f8fafc;
+    
+    --card: #101a2e;
+    --card-foreground: #f8fafc;
+    
+    --border: #1e293b;
+    --input: #1e293b;
+    
+    --primary: #00f2fe;
+    --primary-foreground: #060b19;
+    
+    --secondary: #1e293b;
+    --secondary-foreground: #f8fafc;
+    
+    --accent: #4facfe;
+    --accent-foreground: #f8fafc;
+    
+    --destructive: #ef4444;
+    --destructive-foreground: #f8fafc;
+
+    --success: #10b981;
+    --warning: #f59e0b;
+    --info: #3b82f6;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    -webkit-font-smoothing: antialiased;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card {
+    background-color: var(--card);
+    border-radius: 0.75rem;
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+}
