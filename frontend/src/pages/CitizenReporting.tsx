@@ -81,7 +81,7 @@ const CitizenReporting = () => {
               </div>
 
               <div className="pt-4 border-t border-[var(--border)] flex justify-end">
-                <button type="submit" className="px-6 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-slate-900 font-semibold transition-colors flex items-center gap-2">
+                <button type="submit" className="px-6 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors flex items-center gap-2">
                   <Send className="w-4 h-4" /> Submit Report
                 </button>
               </div>

@@ -15,7 +15,7 @@ const SensorManagement = () => {
         <h2 className="text-lg font-semibold flex items-center gap-2">
           <Cpu className="w-5 h-5 text-slate-500" /> Sensor Management
         </h2>
-        <button className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-slate-900 text-sm font-medium transition-colors">
+        <button className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors">
           + Add Sensor
         </button>
       </header>
