@@ -6,9 +6,9 @@ const Layout = () => {
   const path = location.pathname;
 
   return (
-    <div className="min-h-screen flex bg-[var(--background)] text-[var(--foreground)]">
+    <div className="min-h-screen flex bg-[var(--background)] text-[var(--foreground)] relative">
       {/* Sidebar */}
-      <aside className="w-64 border-r border-[var(--border)] bg-white hidden md:flex flex-col z-20">
+      <aside className="w-64 border-r border-white/80 bg-white/40 backdrop-blur-2xl hidden md:flex flex-col z-20 shadow-[1px_0_15px_rgba(0,0,0,0.01)]">
         <div className="p-6 flex items-center gap-3">
           <div className="w-8 h-8 rounded-[8px] bg-zinc-900 flex items-center justify-center shadow-sm">
             <Droplets className="text-white w-4 h-4" />

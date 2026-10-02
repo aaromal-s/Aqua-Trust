@@ -11,7 +11,7 @@ const SensorManagement = () => {
   return (
     <div className="flex-1 flex flex-col overflow-hidden bg-[var(--background)]">
       {/* Header */}
-      <header className="h-16 border-b border-[var(--border)] bg-[var(--background)]/80 backdrop-blur-md flex items-center justify-between px-6 z-10">
+      <header className="h-16 flex items-center justify-between px-6 z-10 header-panel">
         <h2 className="text-lg font-semibold flex items-center gap-2">
           <Cpu className="w-5 h-5 text-slate-500" /> Sensor Management
         </h2>

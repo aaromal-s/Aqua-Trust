@@ -6,7 +6,7 @@ const Dashboard = () => {
   return (
     <>
       {/* Header */}
-      <header className="h-16 border-b border-[var(--border)] bg-[var(--background)]/80 backdrop-blur-md flex items-center justify-between px-6 z-10">
+      <header className="h-16 flex items-center justify-between px-6 z-10 header-panel">
         <h2 className="text-lg font-semibold">Water Intelligence Overview</h2>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 text-sm text-slate-500">

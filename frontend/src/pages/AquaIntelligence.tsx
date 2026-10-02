@@ -36,7 +36,7 @@ const insights = [
 const AquaIntelligence = () => {
   return (
     <div className="flex-1 flex flex-col overflow-hidden bg-[var(--background)]">
-      <header className="h-16 border-b border-[var(--border)] bg-[var(--background)]/80 backdrop-blur-md flex items-center justify-between px-6 z-10">
+      <header className="h-16 flex items-center justify-between px-6 z-10 header-panel">
         <h2 className="text-lg font-semibold flex items-center gap-2">
           <BrainCircuit className="w-5 h-5 text-purple-400" /> Aqua Intelligence
         </h2>
