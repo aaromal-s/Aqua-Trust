@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { Home, Droplets, Cpu, BrainCircuit, FileText, MessageSquare, ShieldAlert, X } from 'lucide-react';
+import CommandMenu from './CommandMenu';
 
 const Layout = () => {
   const location = useLocation();
@@ -37,6 +38,7 @@ const Layout = () => {
 
   return (
     <div className="min-h-screen flex bg-[var(--background)] text-[var(--foreground)] relative">
+      <CommandMenu />
       {/* Sidebar */}
       <aside className="w-64 border-r border-white/80 liquid-glass hidden md:flex flex-col z-20 shadow-[1px_0_15px_rgba(0,0,0,0.01)]">
         <div className="p-6 flex items-center gap-3">

@@ -66,6 +66,35 @@ const Dashboard = () => {
           </div>
         </div>
         
+        {/* Predictive AI Insights */}
+        <div className="card bg-gradient-to-r from-indigo-900/5 to-blue-900/5 border-indigo-200/50 mb-6 relative overflow-hidden group">
+          <div className="absolute inset-0 bg-indigo-500/10 blur-3xl rounded-full scale-150 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+          <div className="relative z-10 flex flex-col md:flex-row gap-6 items-start md:items-center">
+            <div className="w-12 h-12 rounded-xl bg-indigo-100 border border-indigo-200 flex items-center justify-center shrink-0">
+              <BrainCircuit className="w-6 h-6 text-indigo-600" />
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-xs font-bold uppercase tracking-widest text-indigo-500 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
+                  Aqua Intelligence Forecast
+                </span>
+              </div>
+              <p className="text-zinc-800 font-medium text-lg leading-relaxed">
+                Based on current telemetry, there is a <span className="font-bold text-red-500">78% probability</span> of a turbidity spike in Estuary South within the next 4 hours.
+              </p>
+            </div>
+            <div className="shrink-0 flex gap-3 w-full md:w-auto">
+              <button className="flex-1 md:flex-none btn-premium px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-xl transition-all shadow-md">
+                Pre-empt Filtration
+              </button>
+              <button className="flex-1 md:flex-none btn-secondary px-5 py-2.5 text-zinc-700 text-sm font-semibold rounded-xl transition-all border border-zinc-200">
+                View Analysis
+              </button>
+            </div>
+          </div>
+        </div>
+        
         {/* Map Area */}
         <div className="grid grid-cols-1 gap-6 mb-6">
            <div className="card h-[500px] p-0 overflow-hidden">
