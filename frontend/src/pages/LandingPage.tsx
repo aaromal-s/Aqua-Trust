@@ -16,25 +16,25 @@ const LandingPage = () => {
       <nav className="w-full py-6 px-8 flex justify-between items-center z-10 glass-panel border-x-0 border-t-0 border-b-white/5">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-aqua-400 to-blue-600 flex items-center justify-center shadow-lg shadow-aqua-500/20">
-            <Droplets className="text-white w-6 h-6" />
+            <Droplets className="text-slate-900 w-6 h-6" />
           </div>
           <span className="text-2xl font-bold tracking-tight bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
             AQUA TRUST
           </span>
         </div>
         
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
-          <a href="#" className="hover:text-white transition-colors">Platform</a>
-          <a href="#" className="hover:text-white transition-colors">Monitoring</a>
-          <a href="#" className="hover:text-white transition-colors">Analytics</a>
-          <a href="#" className="hover:text-white transition-colors">Water Map</a>
+        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+          <a href="#" className="hover:text-slate-900 transition-colors">Platform</a>
+          <a href="#" className="hover:text-slate-900 transition-colors">Monitoring</a>
+          <a href="#" className="hover:text-slate-900 transition-colors">Analytics</a>
+          <a href="#" className="hover:text-slate-900 transition-colors">Water Map</a>
         </div>
         
         <div className="flex items-center gap-4">
-          <Link to="/login" className="text-sm font-medium text-gray-300 hover:text-white transition-colors px-4 py-2">
+          <Link to="/login" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors px-4 py-2">
             Sign In
           </Link>
-          <Link to="/dashboard" className="px-5 py-2.5 rounded-full bg-gradient-to-r from-aqua-500 to-blue-600 text-white text-sm font-semibold hover:shadow-lg hover:shadow-aqua-500/25 transition-all flex items-center gap-2">
+          <Link to="/dashboard" className="px-5 py-2.5 rounded-full bg-gradient-to-r from-aqua-500 to-blue-600 text-slate-900 text-sm font-semibold hover:shadow-lg hover:shadow-aqua-500/25 transition-all flex items-center gap-2">
             Get Started <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -54,15 +54,15 @@ const LandingPage = () => {
           </span>
         </h1>
         
-        <p className="text-lg md:text-xl text-gray-400 max-w-2xl mb-10 leading-relaxed">
+        <p className="text-lg md:text-xl text-slate-500 max-w-2xl mb-10 leading-relaxed">
           Monitor water quality in real time, understand environmental changes, detect anomalies, and transform sensor data into actionable water intelligence.
         </p>
         
         <div className="flex flex-col sm:flex-row items-center gap-4">
-          <Link to="/dashboard" className="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-navy-900 text-base font-bold hover:bg-gray-100 transition-all flex items-center justify-center gap-2">
+          <Link to="/dashboard" className="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-white text-base font-bold hover:bg-gray-100 transition-all flex items-center justify-center gap-2">
             Explore Live Monitoring
           </Link>
-          <Link to="/intelligence" className="w-full sm:w-auto px-8 py-4 rounded-full glass-panel text-white text-base font-semibold hover:bg-white/10 transition-all flex items-center justify-center gap-2">
+          <Link to="/intelligence" className="w-full sm:w-auto px-8 py-4 rounded-full glass-panel text-slate-900 text-base font-semibold hover:bg-slate-900/10 transition-all flex items-center justify-center gap-2">
             View Water Intelligence
           </Link>
         </div>
@@ -74,30 +74,30 @@ const LandingPage = () => {
             
             {/* Visual Nodes */}
             <div className="flex flex-col items-center gap-3">
-              <div className="w-16 h-16 rounded-2xl bg-card border border-white/10 flex items-center justify-center shadow-lg">
+              <div className="w-16 h-16 rounded-2xl bg-card border border-slate-900/10 flex items-center justify-center shadow-lg">
                 <Activity className="w-8 h-8 text-blue-400" />
               </div>
-              <span className="text-xs font-medium text-gray-400 uppercase tracking-wider">Sensors</span>
+              <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">Sensors</span>
             </div>
             
             <ArrowRight className="text-gray-600 hidden md:block" />
             <div className="h-8 w-[1px] bg-gray-600 md:hidden" />
             
             <div className="flex flex-col items-center gap-3">
-              <div className="w-16 h-16 rounded-2xl bg-card border border-white/10 flex items-center justify-center shadow-lg">
+              <div className="w-16 h-16 rounded-2xl bg-card border border-slate-900/10 flex items-center justify-center shadow-lg">
                 <Map className="w-8 h-8 text-aqua-400" />
               </div>
-              <span className="text-xs font-medium text-gray-400 uppercase tracking-wider">Map</span>
+              <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">Map</span>
             </div>
             
             <ArrowRight className="text-gray-600 hidden md:block" />
             <div className="h-8 w-[1px] bg-gray-600 md:hidden" />
             
             <div className="flex flex-col items-center gap-3">
-              <div className="w-16 h-16 rounded-2xl bg-card border border-white/10 flex items-center justify-center shadow-lg">
+              <div className="w-16 h-16 rounded-2xl bg-card border border-slate-900/10 flex items-center justify-center shadow-lg">
                 <BarChart3 className="w-8 h-8 text-purple-400" />
               </div>
-              <span className="text-xs font-medium text-gray-400 uppercase tracking-wider">Analytics</span>
+              <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">Analytics</span>
             </div>
             
             <ArrowRight className="text-gray-600 hidden md:block" />
@@ -106,10 +106,10 @@ const LandingPage = () => {
             <div className="flex flex-col items-center gap-3 relative">
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-ping" />
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full" />
-              <div className="w-16 h-16 rounded-2xl bg-card border border-white/10 flex items-center justify-center shadow-lg">
+              <div className="w-16 h-16 rounded-2xl bg-card border border-slate-900/10 flex items-center justify-center shadow-lg">
                 <ShieldAlert className="w-8 h-8 text-red-400" />
               </div>
-              <span className="text-xs font-medium text-gray-400 uppercase tracking-wider">Alerts</span>
+              <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">Alerts</span>
             </div>
 
           </div>

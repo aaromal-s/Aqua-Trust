@@ -52,7 +52,7 @@ const WaterMap = () => {
                 <div className="p-1 min-w-[200px]">
                   <div className="flex items-center justify-between border-b border-gray-200 pb-2 mb-2">
                     <strong className="text-gray-800">{station.id} - {station.name}</strong>
-                    <span className={`px-2 py-0.5 rounded text-xs font-bold text-white bg-${station.status === 'safe' ? 'green' : station.status === 'warning' ? 'yellow' : 'red'}-500`}>
+                    <span className={`px-2 py-0.5 rounded text-xs font-bold text-slate-900 bg-${station.status === 'safe' ? 'green' : station.status === 'warning' ? 'yellow' : 'red'}-500`}>
                       {station.status.toUpperCase()}
                     </span>
                   </div>

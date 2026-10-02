@@ -14,19 +14,19 @@ const AdminPanel = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
           <div className="card border-red-500/20 bg-red-500/5">
             <h3 className="text-red-400 text-sm font-medium mb-1">Total Users</h3>
-            <div className="text-2xl font-bold text-white">42</div>
+            <div className="text-2xl font-bold text-slate-900">42</div>
           </div>
           <div className="card border-red-500/20 bg-red-500/5">
             <h3 className="text-red-400 text-sm font-medium mb-1">Open Reports</h3>
-            <div className="text-2xl font-bold text-white">12</div>
+            <div className="text-2xl font-bold text-slate-900">12</div>
           </div>
           <div className="card border-red-500/20 bg-red-500/5">
             <h3 className="text-red-400 text-sm font-medium mb-1">System Load</h3>
-            <div className="text-2xl font-bold text-white">24%</div>
+            <div className="text-2xl font-bold text-slate-900">24%</div>
           </div>
           <div className="card border-red-500/20 bg-red-500/5">
             <h3 className="text-red-400 text-sm font-medium mb-1">API Errors (24h)</h3>
-            <div className="text-2xl font-bold text-white">0</div>
+            <div className="text-2xl font-bold text-slate-900">0</div>
           </div>
         </div>
 
@@ -39,7 +39,7 @@ const AdminPanel = () => {
           <AdminModule 
             title="Threshold Configuration" 
             desc="Set global and location-specific alert parameters." 
-            icon={<Settings className="w-6 h-6 text-gray-400" />} 
+            icon={<Settings className="w-6 h-6 text-slate-500" />} 
           />
           <AdminModule 
             title="System Logs" 
@@ -59,12 +59,12 @@ const AdminPanel = () => {
 };
 
 const AdminModule = ({ title, desc, icon }: any) => (
-  <div className="card hover:border-red-500/50 hover:bg-white/5 transition-all cursor-pointer group">
-    <div className="p-3 bg-white/5 rounded-lg w-fit mb-4 group-hover:scale-110 transition-transform">
+  <div className="card hover:border-red-500/50 hover:bg-slate-900/5 transition-all cursor-pointer group">
+    <div className="p-3 bg-slate-900/5 rounded-lg w-fit mb-4 group-hover:scale-110 transition-transform">
       {icon}
     </div>
-    <h3 className="text-lg font-bold text-white mb-2">{title}</h3>
-    <p className="text-sm text-gray-400">{desc}</p>
+    <h3 className="text-lg font-bold text-slate-900 mb-2">{title}</h3>
+    <p className="text-sm text-slate-500">{desc}</p>
     <div className="mt-4 pt-4 border-t border-[var(--border)] text-sm text-red-400 font-medium flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity">
       Manage <ArrowRightIcon className="w-4 h-4" />
     </div>

@@ -29,26 +29,26 @@
 
 @layer base {
   :root {
-    --background: #060b19;
-    --foreground: #f8fafc;
+    --background: #f4f7f9;
+    --foreground: #0f172a;
     
-    --card: #101a2e;
-    --card-foreground: #f8fafc;
+    --card: #ffffff;
+    --card-foreground: #0f172a;
     
-    --border: #1e293b;
-    --input: #1e293b;
+    --border: #e2e8f0;
+    --input: #e2e8f0;
     
-    --primary: #00f2fe;
-    --primary-foreground: #060b19;
+    --primary: #0ea5e9;
+    --primary-foreground: #ffffff;
     
-    --secondary: #1e293b;
-    --secondary-foreground: #f8fafc;
+    --secondary: #f1f5f9;
+    --secondary-foreground: #0f172a;
     
-    --accent: #4facfe;
-    --accent-foreground: #f8fafc;
+    --accent: #0284c7;
+    --accent-foreground: #ffffff;
     
     --destructive: #ef4444;
-    --destructive-foreground: #f8fafc;
+    --destructive-foreground: #ffffff;
 
     --success: #10b981;
     --warning: #f59e0b;
@@ -65,18 +65,18 @@
 
 @layer components {
   .glass-panel {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
   }
   
   .card {
     background-color: var(--card);
-    border-radius: 0.75rem;
+    border-radius: 1rem;
     border: 1px solid var(--border);
     padding: 1.5rem;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
   }
 }
 

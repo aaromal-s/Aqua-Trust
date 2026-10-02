@@ -11,28 +11,28 @@ const Dashboard = () => {
       <aside className="w-64 border-r border-[var(--border)] bg-[var(--card)] hidden md:flex flex-col">
         <div className="p-6 flex items-center gap-3">
           <div className="w-8 h-8 rounded bg-gradient-to-br from-aqua-400 to-blue-600 flex items-center justify-center">
-            <Droplets className="text-white w-5 h-5" />
+            <Droplets className="text-slate-900 w-5 h-5" />
           </div>
           <span className="text-xl font-bold tracking-tight">Aqua Trust</span>
         </div>
         
         <div className="flex-1 overflow-y-auto py-4 px-3 space-y-1">
-          <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Monitoring</div>
+          <div className="px-3 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider">Monitoring</div>
           <SidebarItem icon={<Home size={18} />} label="Overview" path="/dashboard" active />
           <SidebarItem icon={<Activity size={18} />} label="Live Monitoring" path="/dashboard" />
           <SidebarItem icon={<Droplets size={18} />} label="Water Quality" path="/quality" />
           <SidebarItem icon={<Map size={18} />} label="Water Map" path="/dashboard" />
           
-          <div className="px-3 py-2 mt-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Analysis</div>
+          <div className="px-3 py-2 mt-4 text-xs font-semibold text-slate-400 uppercase tracking-wider">Analysis</div>
           <SidebarItem icon={<BarChart2 size={18} />} label="Analytics" path="/dashboard" />
           <SidebarItem icon={<Bell size={18} />} label="Alerts" badge="3" badgeColor="bg-red-500" path="/dashboard" />
           <SidebarItem icon={<BrainCircuit size={18} />} label="Aqua Intelligence" path="/intelligence" />
           
-          <div className="px-3 py-2 mt-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Infrastructure</div>
+          <div className="px-3 py-2 mt-4 text-xs font-semibold text-slate-400 uppercase tracking-wider">Infrastructure</div>
           <SidebarItem icon={<Cpu size={18} />} label="Sensors" path="/sensors" />
           <SidebarItem icon={<MapPin size={18} />} label="Locations" path="/dashboard" />
           
-          <div className="px-3 py-2 mt-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Management</div>
+          <div className="px-3 py-2 mt-4 text-xs font-semibold text-slate-400 uppercase tracking-wider">Management</div>
           <SidebarItem icon={<FileText size={18} />} label="Reports" path="/reports" />
           <SidebarItem icon={<MessageSquare size={18} />} label="Issue Reports" path="/reporting" />
           <SidebarItem icon={<ShieldAlert size={18} />} label="Admin Panel" path="/admin" />
@@ -51,7 +51,7 @@ const Dashboard = () => {
         <header className="h-16 border-b border-[var(--border)] bg-[var(--background)]/80 backdrop-blur-md flex items-center justify-between px-6 z-10">
           <h2 className="text-lg font-semibold">Water Intelligence Overview</h2>
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 text-sm text-gray-400">
+            <div className="flex items-center gap-2 text-sm text-slate-500">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
               Live Data Active
             </div>
@@ -102,12 +102,12 @@ const Dashboard = () => {
 };
 
 const SidebarItem = ({ icon, label, active, badge, badgeColor, path = "#" }: any) => (
-  <Link to={path} className={`flex items-center justify-between px-3 py-2.5 rounded-lg transition-colors ${active ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-gray-200'}`}>
+  <Link to={path} className={`flex items-center justify-between px-3 py-2.5 rounded-lg transition-colors ${active ? 'bg-slate-900/10 text-slate-900' : 'text-slate-500 hover:bg-slate-900/5 hover:text-slate-700'}`}>
     <div className="flex items-center gap-3">
       {icon}
       <span className="text-sm font-medium">{label}</span>
     </div>
-    {badge && <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded text-white ${badgeColor}`}>{badge}</span>}
+    {badge && <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded text-slate-900 ${badgeColor}`}>{badge}</span>}
   </Link>
 );
 
@@ -115,17 +115,17 @@ const KpiCard = ({ title, value, status, trend, trendUp, icon, isAlert }: any) =
   <div className={`card relative overflow-hidden ${isAlert ? 'border-red-500/30 bg-red-500/5' : ''}`}>
     <div className="flex justify-between items-start mb-4">
       <div>
-        <h3 className="text-gray-400 text-sm font-medium mb-1">{title}</h3>
-        <div className="text-2xl font-bold text-white">{value}</div>
+        <h3 className="text-slate-500 text-sm font-medium mb-1">{title}</h3>
+        <div className="text-2xl font-bold text-slate-900">{value}</div>
       </div>
-      <div className="p-2 bg-white/5 rounded-lg">
+      <div className="p-2 bg-slate-900/5 rounded-lg">
         {icon}
       </div>
     </div>
     <div className="flex items-center justify-between mt-4">
-      <span className={`text-sm ${isAlert ? 'text-red-400' : 'text-gray-400'}`}>{status}</span>
+      <span className={`text-sm ${isAlert ? 'text-red-400' : 'text-slate-500'}`}>{status}</span>
       {trend && (
-        <span className={`text-xs font-semibold px-2 py-1 rounded bg-white/5 ${trendUp ? 'text-green-400' : 'text-red-400'}`}>
+        <span className={`text-xs font-semibold px-2 py-1 rounded bg-slate-900/5 ${trendUp ? 'text-green-400' : 'text-red-400'}`}>
           {trend}
         </span>
       )}
@@ -144,10 +144,10 @@ const AlertItem = ({ type, location, message, time }: { type: 'critical' | 'warn
     <div className="p-3 rounded-lg border border-[var(--border)] bg-[var(--background)]/50 hover:bg-[var(--background)] transition-colors cursor-pointer">
       <div className="flex justify-between items-start mb-1">
         <span className={`text-xs font-bold px-1.5 py-0.5 rounded border ${colors[type]}`}>{type.toUpperCase()}</span>
-        <span className="text-xs text-gray-500">{time}</span>
+        <span className="text-xs text-slate-400">{time}</span>
       </div>
-      <div className="text-sm font-medium text-gray-300 mt-2">{location}</div>
-      <div className="text-sm text-gray-400 mt-1 line-clamp-2">{message}</div>
+      <div className="text-sm font-medium text-slate-600 mt-2">{location}</div>
+      <div className="text-sm text-slate-500 mt-1 line-clamp-2">{message}</div>
     </div>
   );
 };
