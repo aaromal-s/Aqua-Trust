@@ -59,20 +59,20 @@ const Dashboard = () => {
 };
 
 const KpiCard = ({ title, value, status, trend, trendUp, icon, isAlert }: any) => (
-  <div className={`card relative overflow-hidden ${isAlert ? 'border-red-500/30 bg-red-500/5' : ''}`}>
+  <div className={`card card-hover relative overflow-hidden ${isAlert ? 'border-red-500/30 bg-red-500/5' : ''}`}>
     <div className="flex justify-between items-start mb-4">
       <div>
         <h3 className="text-slate-500 text-sm font-medium mb-1">{title}</h3>
         <div className="text-2xl font-bold text-slate-900">{value}</div>
       </div>
-      <div className="p-2 bg-slate-900/5 rounded-lg">
+      <div className="p-2 bg-slate-100 rounded-lg shadow-sm">
         {icon}
       </div>
     </div>
     <div className="flex items-center justify-between mt-4">
-      <span className={`text-sm ${isAlert ? 'text-red-400' : 'text-slate-500'}`}>{status}</span>
+      <span className={`text-sm ${isAlert ? 'text-red-500 font-medium' : 'text-slate-500'}`}>{status}</span>
       {trend && (
-        <span className={`text-xs font-semibold px-2 py-1 rounded bg-slate-900/5 ${trendUp ? 'text-green-400' : 'text-red-400'}`}>
+        <span className={`text-xs font-semibold px-2 py-1 rounded-md ${trendUp ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}`}>
           {trend}
         </span>
       )}
