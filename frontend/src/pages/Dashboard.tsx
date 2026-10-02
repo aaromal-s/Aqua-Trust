@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Activity, Droplets, Cpu, ShieldAlert } from 'lucide-react';
+import { Activity, Droplets, Cpu, ShieldAlert, BrainCircuit } from 'lucide-react';
 import WaterMap from '../components/WaterMap';
 import WaterQualityChart from '../components/WaterQualityChart';
 
