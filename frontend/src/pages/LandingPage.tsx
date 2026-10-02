@@ -42,14 +42,14 @@ const LandingPage = () => {
         </div>
         
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-500">
-          <a href="#" className="hover:text-zinc-900 transition-colors">Platform</a>
-          <a href="#" className="hover:text-zinc-900 transition-colors">Telemetry</a>
-          <a href="#" className="hover:text-zinc-900 transition-colors">Analytics</a>
-          <a href="#" className="hover:text-zinc-900 transition-colors">Customers</a>
+          <Link to="/dashboard" className="hover:text-zinc-900 transition-colors">Platform</Link>
+          <Link to="/quality" className="hover:text-zinc-900 transition-colors">Telemetry</Link>
+          <Link to="/intelligence" className="hover:text-zinc-900 transition-colors">Analytics</Link>
+          <Link to="/reports" className="hover:text-zinc-900 transition-colors">Customers</Link>
         </div>
         
         <div className="flex items-center gap-5">
-          <Link to="/login" className="text-sm font-medium text-zinc-500 hover:text-zinc-900 transition-colors">
+          <Link to="/dashboard" className="text-sm font-medium text-zinc-500 hover:text-zinc-900 transition-colors">
             Sign In
           </Link>
           <Link to="/dashboard" className="px-5 py-2.5 rounded-[10px] bg-zinc-900 text-white text-sm font-medium hover:bg-zinc-800 transition-all btn-premium flex items-center gap-2">
