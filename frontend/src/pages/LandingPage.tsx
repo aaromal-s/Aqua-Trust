@@ -9,7 +9,26 @@ const LandingPage = () => {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
       
       {/* Clean Masked Grid Background */}
-      <div className="absolute inset-0 bg-grid-premium pointer-events-none"></div>
+      <div className="absolute inset-0 bg-grid-premium pointer-events-none z-0"></div>
+      
+      {/* 1. Telemetry Wave Animation */}
+      <div className="absolute inset-x-0 top-1/3 h-[300px] pointer-events-none overflow-hidden z-0 opacity-20 mask-image:linear-gradient(to_bottom,white,transparent)">
+        <div className="animate-wave flex h-full items-center">
+          <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="h-full w-full stroke-blue-400 fill-none" strokeWidth="1" strokeLinecap="round">
+            <path d="M0,60 C150,120 300,0 450,60 C600,120 750,0 900,60 C1050,120 1200,60 1200,60" />
+            <path d="M0,60 C150,120 300,0 450,60 C600,120 750,0 900,60 C1050,120 1200,60 1200,60" transform="translate(1200,0)" />
+          </svg>
+        </div>
+      </div>
+
+      {/* 3. Data Bubbles Animation */}
+      <div className="absolute bottom-0 w-full h-[300px] pointer-events-none z-0 overflow-hidden">
+        <div className="absolute bottom-[-10px] w-1.5 h-1.5 bg-blue-400/40 rounded-full bubble-1" />
+        <div className="absolute bottom-[-10px] w-2 h-2 bg-indigo-400/30 rounded-full bubble-2" />
+        <div className="absolute bottom-[-10px] w-1 h-1 bg-cyan-400/50 rounded-full bubble-3" />
+        <div className="absolute bottom-[-10px] w-1.5 h-1.5 bg-blue-500/40 rounded-full bubble-4" />
+        <div className="absolute bottom-[-10px] w-2 h-2 bg-blue-300/30 rounded-full bubble-5" />
+      </div>
       
       {/* Navbar */}
       <nav className="w-full py-5 px-8 flex justify-between items-center z-10 header-panel animate-spring-up">
@@ -76,8 +95,11 @@ const LandingPage = () => {
             <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-80" />
             
             {/* Visual Nodes */}
-            <div className="flex flex-col items-center gap-4 z-20">
-              <div className="w-16 h-16 rounded-2xl bg-zinc-50 border border-zinc-200 flex items-center justify-center btn-secondary">
+            <div className="flex flex-col items-center gap-4 z-20 relative group cursor-pointer">
+              {/* 2. Sensor Sonar Ripple */}
+              <div className="absolute inset-0 rounded-2xl border-blue-400/50 animate-ripple pointer-events-none hidden group-hover:block" />
+              
+              <div className="w-16 h-16 rounded-2xl bg-zinc-50 border border-zinc-200 flex items-center justify-center btn-secondary relative z-10">
                 <Activity className="w-6 h-6 text-zinc-700" />
               </div>
               <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Hardware</span>
@@ -85,8 +107,11 @@ const LandingPage = () => {
             
             <ArrowRight className="text-zinc-300 hidden md:block z-20" />
             
-            <div className="flex flex-col items-center gap-4 z-20">
-              <div className="w-16 h-16 rounded-2xl bg-zinc-50 border border-zinc-200 flex items-center justify-center btn-secondary">
+            <div className="flex flex-col items-center gap-4 z-20 relative group cursor-pointer">
+              {/* 2. Sensor Sonar Ripple */}
+              <div className="absolute inset-0 rounded-2xl border-indigo-400/50 animate-ripple pointer-events-none hidden group-hover:block" />
+              
+              <div className="w-16 h-16 rounded-2xl bg-zinc-50 border border-zinc-200 flex items-center justify-center btn-secondary relative z-10">
                 <Map className="w-6 h-6 text-blue-600" />
               </div>
               <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Telemetry</span>
@@ -94,8 +119,11 @@ const LandingPage = () => {
             
             <ArrowRight className="text-zinc-300 hidden md:block z-20" />
             
-            <div className="flex flex-col items-center gap-4 z-20">
-              <div className="w-16 h-16 rounded-2xl bg-zinc-50 border border-zinc-200 flex items-center justify-center btn-secondary">
+            <div className="flex flex-col items-center gap-4 z-20 relative group cursor-pointer">
+              {/* 2. Sensor Sonar Ripple */}
+              <div className="absolute inset-0 rounded-2xl border-purple-400/50 animate-ripple pointer-events-none hidden group-hover:block" />
+              
+              <div className="w-16 h-16 rounded-2xl bg-zinc-50 border border-zinc-200 flex items-center justify-center btn-secondary relative z-10">
                 <BarChart3 className="w-6 h-6 text-indigo-600" />
               </div>
               <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Analytics</span>
@@ -103,10 +131,13 @@ const LandingPage = () => {
             
             <ArrowRight className="text-zinc-300 hidden md:block z-20" />
             
-            <div className="flex flex-col items-center gap-4 relative z-20">
-              <div className="absolute -top-1.5 -right-1.5 w-3.5 h-3.5 bg-red-500 rounded-full animate-ping opacity-75" />
-              <div className="absolute -top-1.5 -right-1.5 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-white" />
-              <div className="w-16 h-16 rounded-2xl bg-zinc-50 border border-zinc-200 flex items-center justify-center btn-secondary">
+            <div className="flex flex-col items-center gap-4 relative z-20 group cursor-pointer">
+              {/* 2. Sensor Sonar Ripple */}
+              <div className="absolute inset-0 rounded-2xl border-red-400/50 animate-ripple pointer-events-none block" />
+              
+              <div className="absolute -top-1.5 -right-1.5 w-3.5 h-3.5 bg-red-500 rounded-full animate-ping opacity-75 z-30" />
+              <div className="absolute -top-1.5 -right-1.5 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-white z-30" />
+              <div className="w-16 h-16 rounded-2xl bg-zinc-50 border border-zinc-200 flex items-center justify-center btn-secondary relative z-10">
                 <ShieldAlert className="w-6 h-6 text-red-600" />
               </div>
               <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Response</span>

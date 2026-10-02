@@ -1,122 +1,137 @@
 @import "tailwindcss";
 
-@theme {
-  --color-navy-50: #f0f4f8;
-  --color-navy-100: #d9e2ec;
-  --color-navy-200: #bcccdc;
-  --color-navy-300: #9fb3c8;
-  --color-navy-400: #829ab1;
-  --color-navy-500: #627d98;
-  --color-navy-600: #486581;
-  --color-navy-700: #334e68;
-  --color-navy-800: #243b53;
-  --color-navy-900: #102a43;
-  
-  --color-midnight: #0b132b;
-  
-  --color-aqua-50: #f0fbff;
-  --color-aqua-100: #e0f6ff;
-  --color-aqua-200: #bbedff;
-  --color-aqua-300: #84e1ff;
-  --color-aqua-400: #42caff;
-  --color-aqua-500: #16a8ff;
-  --color-aqua-600: #0085f3;
-  --color-aqua-700: #006ad8;
-  --color-aqua-800: #0055b1;
-  --color-aqua-900: #004892;
-  --color-aqua-950: #002c5c;
-}
-
 @layer base {
   :root {
-    --background: #f8fafc;
-    --foreground: #0f172a;
-    
+    --background: #fafafa;
+    --foreground: #09090b;
     --card: #ffffff;
-    --card-foreground: #0f172a;
-    
-    --border: #e2e8f0;
-    --input: #e2e8f0;
-    
-    --primary: #2563eb;
-    --primary-foreground: #ffffff;
-    
-    --secondary: #f1f5f9;
-    --secondary-foreground: #0f172a;
-    
-    --accent: #0ea5e9;
-    --accent-foreground: #ffffff;
-    
-    --destructive: #ef4444;
-    --destructive-foreground: #ffffff;
-
-    --success: #10b981;
-    --warning: #f59e0b;
-    --info: #3b82f6;
+    --border: #e4e4e7;
+    --primary: #18181b;
   }
 
   body {
     background-color: var(--background);
     color: var(--foreground);
     -webkit-font-smoothing: antialiased;
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 }
 
 @layer components {
-  /* Clean, non-glassy header for a more professional feel */
-  .header-panel {
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
-  }
-  
+  /* Ultra Premium Card - like Stripe / Linear */
   .card {
     background-color: var(--card);
-    border-radius: 0.75rem;
-    border: 1px solid var(--border);
+    border-radius: 1rem;
+    border: 1px solid rgba(9, 9, 11, 0.08);
     padding: 1.5rem;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+      0 1px 2px rgba(0, 0, 0, 0.02),
+      0 4px 12px rgba(0, 0, 0, 0.02),
+      0 16px 24px -10px rgba(0, 0, 0, 0.03);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
-
+  
   .card-hover:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
-    border-color: #cbd5e1;
+    transform: translateY(-2px) scale(1.002);
+    box-shadow: 
+      0 1px 3px rgba(0, 0, 0, 0.02),
+      0 10px 24px rgba(0, 0, 0, 0.04),
+      0 32px 40px -16px rgba(0, 0, 0, 0.06);
+    border-color: rgba(9, 9, 11, 0.15);
   }
 
-  .bg-grid-pattern {
-    background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+  /* Seamless fading grid background */
+  .bg-grid-premium {
+    background-image: radial-gradient(rgba(9, 9, 11, 0.12) 1px, transparent 1px);
     background-size: 24px 24px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+  }
+
+  /* Premium Buttons */
+  .btn-premium {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  .btn-secondary {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+
+  .header-panel {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(9, 9, 11, 0.06);
   }
 }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Elegant Apple-like Spring Reveal */
+@keyframes springReveal {
+  0% { 
+    opacity: 0; 
+    transform: translateY(24px) scale(0.98);
+    filter: blur(4px);
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
 }
 
-.animate-fade-in-up {
-  animation: fadeInUp 0.5s ease-out forwards;
+.animate-spring-up {
   opacity: 0;
+  animation: springReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* Telemetry Wave */
+@keyframes wave-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-wave {
+  animation: wave-scroll 40s linear infinite;
+  width: 200%;
+}
+
+/* Sensor Sonar Ripple */
+@keyframes sonar-ripple {
+  0% { transform: scale(1); opacity: 0.4; border-width: 1px; }
+  100% { transform: scale(2.5); opacity: 0; border-width: 2px; }
+}
+.animate-ripple {
+  animation: sonar-ripple 3s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+/* Data Bubbles */
+@keyframes float-up {
+  0% { transform: translateY(0) scale(1); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-800px) scale(0.5); opacity: 0; }
+}
+.bubble-1 { animation: float-up 15s linear infinite; left: 15%; }
+.bubble-2 { animation: float-up 22s linear infinite; left: 35%; animation-delay: 5s; }
+.bubble-3 { animation: float-up 18s linear infinite; left: 65%; animation-delay: 2s; }
+.bubble-4 { animation: float-up 25s linear infinite; left: 85%; animation-delay: 8s; }
+.bubble-5 { animation: float-up 20s linear infinite; left: 50%; animation-delay: 12s; }
 
 .delay-100 { animation-delay: 100ms; }
 .delay-200 { animation-delay: 200ms; }
 .delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
 
-/* Custom scrollbar to look sleek */
+/* Custom Scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 .custom-scrollbar::-webkit-scrollbar-track {
   background: transparent;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #cbd5e1;
+  background-color: #d4d4d8;
   border-radius: 10px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: #94a3b8;
+  background-color: #a1a1aa;
 }
