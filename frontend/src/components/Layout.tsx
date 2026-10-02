@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { Home, Droplets, Cpu, BrainCircuit, FileText, MessageSquare, ShieldAlert, X } from 'lucide-react';
+import { Home, Droplets, Cpu, BrainCircuit, FileText, MessageSquare, ShieldAlert, X, UserCircle, LogOut } from 'lucide-react';
 import CommandMenu from './CommandMenu';
+import { useAuth } from '../context/AuthContext';
 
 const Layout = () => {
   const location = useLocation();
   const path = location.pathname;
+  const { currentUser, toggleRole } = useAuth();
+  const isAdmin = currentUser.role === 'admin';
   
   const [liveAlert, setLiveAlert] = useState<{id: number, message: string} | null>(null);
 
   useEffect(() => {
+    // Only show live alerts for admin in this mockup
+    if (!isAdmin) return;
+
     const messages = [
       "pH spike detected in Sector 7",
       "Turbidity anomaly in River North",
@@ -19,28 +25,24 @@ const Layout = () => {
     ];
     
     const interval = setInterval(() => {
-      // 60% chance to show an alert every 12 seconds
       if (Math.random() > 0.4) {
         setLiveAlert({
           id: Date.now(),
           message: messages[Math.floor(Math.random() * messages.length)]
         });
         
-        // Auto dismiss after 5 seconds
-        setTimeout(() => {
-          setLiveAlert(null);
-        }, 5000);
+        setTimeout(() => setLiveAlert(null), 5000);
       }
     }, 12000);
     
     return () => clearInterval(interval);
-  }, []);
+  }, [isAdmin]);
 
   return (
     <div className="min-h-screen flex bg-[var(--background)] text-[var(--foreground)] relative">
       <CommandMenu />
       {/* Sidebar */}
-      <aside className="w-64 border-r border-white/80 liquid-glass hidden md:flex flex-col z-20 shadow-[1px_0_15px_rgba(0,0,0,0.01)]">
+      <aside className="w-64 border-r border-white/80 liquid-glass hidden md:flex flex-col z-20 shadow-[1px_0_15px_rgba(0,0,0,0.01)] relative">
         <div className="p-6 flex items-center gap-3">
           <div className="w-8 h-8 rounded-[8px] bg-zinc-900 flex items-center justify-center shadow-sm">
             <Droplets className="text-white w-4 h-4" />
@@ -49,20 +51,51 @@ const Layout = () => {
         </div>
         
         <div className="flex-1 overflow-y-auto py-4 px-3 space-y-1">
-          <div className="px-3 py-2 text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-2">Monitoring</div>
-          <SidebarItem icon={<Home size={18} />} label="Overview" path="/dashboard" active={path === '/dashboard'} />
-          <SidebarItem icon={<Droplets size={18} />} label="Water Quality" path="/quality" active={path === '/quality'} />
-          
-          <div className="px-3 py-2 text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-6">Analysis</div>
-          <SidebarItem icon={<BrainCircuit size={18} />} label="Aqua Intelligence" path="/intelligence" active={path === '/intelligence'} />
-          
-          <div className="px-3 py-2 text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-6">Infrastructure</div>
-          <SidebarItem icon={<Cpu size={18} />} label="Sensors" path="/sensors" active={path === '/sensors'} />
-          
-          <div className="px-3 py-2 text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-6">Management</div>
-          <SidebarItem icon={<FileText size={18} />} label="Reports" path="/reports" active={path === '/reports'} />
-          <SidebarItem icon={<MessageSquare size={18} />} label="Issue Reports" path="/reporting" active={path === '/reporting'} />
-          <SidebarItem icon={<ShieldAlert size={18} />} label="Admin Panel" path="/admin" active={path === '/admin'} />
+          {isAdmin ? (
+            <>
+              <div className="px-3 py-2 text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-2">Global Monitoring</div>
+              <SidebarItem icon={<Home size={18} />} label="Overview" path="/dashboard" active={path === '/dashboard'} />
+              <SidebarItem icon={<Droplets size={18} />} label="Water Quality" path="/quality" active={path === '/quality'} />
+              
+              <div className="px-3 py-2 text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-6">Analysis</div>
+              <SidebarItem icon={<BrainCircuit size={18} />} label="Aqua Intelligence" path="/intelligence" active={path === '/intelligence'} />
+              
+              <div className="px-3 py-2 text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-6">Infrastructure</div>
+              <SidebarItem icon={<Cpu size={18} />} label="Sensors" path="/sensors" active={path === '/sensors'} />
+              
+              <div className="px-3 py-2 text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-6">Management</div>
+              <SidebarItem icon={<FileText size={18} />} label="Reports" path="/reports" active={path === '/reports'} />
+              <SidebarItem icon={<MessageSquare size={18} />} label="Issue Reports" path="/reporting" active={path === '/reporting'} />
+              <SidebarItem icon={<ShieldAlert size={18} />} label="Admin Panel" path="/admin" active={path === '/admin'} />
+            </>
+          ) : (
+            <>
+              <div className="px-3 py-2 text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-2">My System</div>
+              <SidebarItem icon={<Home size={18} />} label="My Dashboard" path="/dashboard" active={path === '/dashboard'} />
+              <SidebarItem icon={<Cpu size={18} />} label="My Sensors" path="/sensors" active={path === '/sensors'} />
+              
+              <div className="px-3 py-2 text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-6">Support</div>
+              <SidebarItem icon={<MessageSquare size={18} />} label="Report Issue" path="/reporting" active={path === '/reporting'} />
+            </>
+          )}
+        </div>
+
+        <div className="p-4 border-t border-zinc-200/50 bg-zinc-50/50">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 rounded-full bg-zinc-200 flex items-center justify-center">
+              <UserCircle className="text-zinc-500 w-6 h-6" />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-zinc-800 leading-tight">{currentUser.name}</p>
+              <p className="text-[11px] text-zinc-500 font-medium capitalize">{currentUser.role} Account</p>
+            </div>
+          </div>
+          <button 
+            onClick={toggleRole}
+            className="w-full flex items-center justify-center gap-2 text-xs font-semibold bg-white border border-zinc-200 text-zinc-700 py-2 rounded-lg hover:bg-zinc-100 transition-colors shadow-sm"
+          >
+            <LogOut size={14} /> Switch to {isAdmin ? 'User' : 'Admin'}
+          </button>
         </div>
       </aside>
 

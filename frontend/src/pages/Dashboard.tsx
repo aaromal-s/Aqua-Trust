@@ -1,24 +1,71 @@
 import React, { useState, useEffect } from 'react';
-import { Activity, Droplets, Cpu, ShieldAlert, BrainCircuit } from 'lucide-react';
+import { Activity, Droplets, Cpu, ShieldAlert, BrainCircuit, Home as HomeIcon, CheckCircle2 } from 'lucide-react';
 import WaterMap from '../components/WaterMap';
 import WaterQualityChart from '../components/WaterQualityChart';
+import { useAuth } from '../context/AuthContext';
 
 const Dashboard = () => {
+  const { currentUser } = useAuth();
+  const isAdmin = currentUser.role === 'admin';
+
   const [metrics, setMetrics] = useState({
     qualityScore: 87.4,
     activeSensors: 142
   });
 
+  const [userMetrics, setUserMetrics] = useState({
+    dailyUsage: 142,
+    ph: 7.2,
+    filterLife: 89
+  });
+
   useEffect(() => {
     // Simulate real-time ticking telemetry data
     const interval = setInterval(() => {
-      setMetrics(prev => ({
-        qualityScore: Math.min(100, Math.max(0, prev.qualityScore + (Math.random() * 0.4 - 0.2))),
-        activeSensors: prev.activeSensors + (Math.random() > 0.95 ? 1 : 0) - (Math.random() > 0.95 ? 1 : 0)
-      }));
+      if (isAdmin) {
+        setMetrics(prev => ({
+          qualityScore: Math.min(100, Math.max(0, prev.qualityScore + (Math.random() * 0.4 - 0.2))),
+          activeSensors: prev.activeSensors + (Math.random() > 0.95 ? 1 : 0) - (Math.random() > 0.95 ? 1 : 0)
+        }));
+      } else {
+        setUserMetrics(prev => ({
+          ...prev,
+          ph: Math.min(14, Math.max(0, prev.ph + (Math.random() * 0.1 - 0.05))),
+          dailyUsage: prev.dailyUsage + (Math.random() > 0.7 ? 0.1 : 0)
+        }));
+      }
     }, 2500);
     return () => clearInterval(interval);
-  }, []);
+  }, [isAdmin]);
+
+  if (!isAdmin) {
+    return (
+      <div className="flex-1 overflow-y-auto p-6 bg-[#fafafa]">
+        <header className="mb-8 flex items-end justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-zinc-900 tracking-tight">My Water System</h1>
+            <p className="text-zinc-500 mt-1">{currentUser.systemName}</p>
+          </div>
+          <div className="flex items-center gap-2 text-sm text-emerald-600 font-semibold bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200">
+            <CheckCircle2 className="w-4 h-4" /> System Optimal
+          </div>
+        </header>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <KpiCard title="Today's Usage" value={`${userMetrics.dailyUsage.toFixed(1)} L`} status="Normal" trend="+1.2L" trendUp={false} icon={<Droplets className="text-blue-500" />} />
+          <KpiCard title="Current pH Level" value={userMetrics.ph.toFixed(2)} status="Perfect Balance" trend="Stable" trendUp={true} icon={<Activity className="text-emerald-500" />} />
+          <KpiCard title="Filter Health" value={`${userMetrics.filterLife}%`} status="Good" trend="-1%" trendUp={false} icon={<Cpu className="text-indigo-500" />} />
+        </div>
+
+        <div className="card bg-white p-6 border border-zinc-200 shadow-sm rounded-2xl">
+          <h3 className="font-semibold text-lg mb-4">Weekly Usage & Quality</h3>
+          <div className="h-64">
+            <WaterQualityChart />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
