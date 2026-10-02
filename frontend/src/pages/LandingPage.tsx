@@ -49,11 +49,11 @@ const LandingPage = () => {
         </div>
         
         <div className="flex items-center gap-5">
-          <Link to="/dashboard" className="text-sm font-medium text-zinc-500 hover:text-zinc-900 transition-colors">
+          <Link to="/login" className="text-sm font-medium text-zinc-500 hover:text-zinc-900 transition-colors">
             Sign In
           </Link>
-          <Link to="/dashboard" className="px-5 py-2.5 rounded-[10px] bg-zinc-900 text-white text-sm font-medium hover:bg-zinc-800 transition-all btn-premium flex items-center gap-2">
-            Open Platform
+          <Link to="/register" className="px-5 py-2.5 rounded-[10px] bg-zinc-900 text-white text-sm font-medium hover:bg-zinc-800 transition-all btn-premium flex items-center gap-2">
+            Get Started
           </Link>
         </div>
       </nav>
@@ -63,26 +63,26 @@ const LandingPage = () => {
         
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-zinc-200 text-zinc-600 text-[11px] font-semibold tracking-widest uppercase mb-8 animate-spring-up delay-100 shadow-sm">
           <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-          Hardware & Telemetry Engine 2.0
+          Predictive Intelligence Network
         </div>
         
         <h1 className="text-5xl md:text-[80px] font-bold tracking-tighter mb-6 max-w-5xl leading-[1.05] text-zinc-900 animate-spring-up delay-200">
-          Water Intelligence. <br />
+          Water Security. <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-900 via-zinc-600 to-zinc-500">
-            Engineered for Precision.
+            Powered by the People.
           </span>
         </h1>
         
         <p className="text-lg md:text-xl text-zinc-500 max-w-2xl mb-10 leading-relaxed font-medium animate-spring-up delay-300">
-          The enterprise standard for real-time sensor telemetry, environmental compliance, and predictive water quality analytics.
+          A platform bridging citizen monitoring and AI analytics to ensure transparent, safe, and sustainable water management for everyone.
         </p>
         
         <div className="flex flex-col sm:flex-row items-center gap-4 animate-spring-up delay-400">
-          <Link to="/dashboard" className="w-full sm:w-auto px-8 py-3.5 rounded-[12px] bg-zinc-900 text-white text-sm font-medium hover:bg-zinc-800 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 btn-premium">
-            Explore Demo <ArrowRight className="w-4 h-4" />
+          <Link to="/register" className="w-full sm:w-auto px-8 py-3.5 rounded-[12px] bg-zinc-900 text-white text-sm font-medium hover:bg-zinc-800 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 btn-premium">
+            Join the Network <ArrowRight className="w-4 h-4" />
           </Link>
           <Link to="/reports" className="w-full sm:w-auto px-8 py-3.5 rounded-[12px] bg-white border border-zinc-200 text-zinc-700 text-sm font-medium hover:bg-zinc-50 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 btn-secondary">
-            Documentation <ExternalLink className="w-4 h-4 text-zinc-400" />
+            How it Works <ExternalLink className="w-4 h-4 text-zinc-400" />
           </Link>
         </div>
 
@@ -96,25 +96,12 @@ const LandingPage = () => {
             
             {/* Visual Nodes */}
             <div className="flex flex-col items-center gap-4 z-20 relative group cursor-pointer">
-              {/* 2. Sensor Sonar Ripple */}
               <div className="absolute inset-0 rounded-2xl border-blue-400/50 animate-ripple pointer-events-none hidden group-hover:block" />
               
               <div className="w-16 h-16 rounded-2xl bg-zinc-50 border border-zinc-200 flex items-center justify-center btn-secondary relative z-10">
-                <Activity className="w-6 h-6 text-zinc-700" />
+                <Map className="w-6 h-6 text-zinc-700" />
               </div>
-              <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Hardware</span>
-            </div>
-            
-            <ArrowRight className="text-zinc-300 hidden md:block z-20" />
-            
-            <div className="flex flex-col items-center gap-4 z-20 relative group cursor-pointer">
-              {/* 2. Sensor Sonar Ripple */}
-              <div className="absolute inset-0 rounded-2xl border-indigo-400/50 animate-ripple pointer-events-none hidden group-hover:block" />
-              
-              <div className="w-16 h-16 rounded-2xl bg-zinc-50 border border-zinc-200 flex items-center justify-center btn-secondary relative z-10">
-                <Map className="w-6 h-6 text-blue-600" />
-              </div>
-              <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Telemetry</span>
+              <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Citizen Network</span>
             </div>
             
             <ArrowRight className="text-zinc-300 hidden md:block z-20" />
@@ -145,6 +132,44 @@ const LandingPage = () => {
 
           </div>
         </div>
+
+        {/* Description Section */}
+        <div className="mt-32 max-w-4xl text-center px-4 animate-spring-up delay-600">
+          <h2 className="text-3xl font-bold tracking-tight text-zinc-900 mb-6">Democratizing Water Intelligence</h2>
+          <p className="text-zinc-600 text-lg leading-relaxed">
+            AquaTrust is a revolutionary platform that empowers everyday citizens to take control of their local water quality. By combining community-driven sensor networks with state-of-the-art Predictive AI, we create a transparent, real-time map of global water safety. Whether you're a municipal admin overseeing thousands of nodes, or a citizen monitoring your own home, AquaTrust provides the exact tools you need.
+          </p>
+        </div>
+
+        {/* Workflow Section */}
+        <div className="mt-24 w-full max-w-6xl px-4 animate-spring-up delay-700">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl font-bold tracking-tight text-zinc-900">How It Works</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="card p-8 rounded-3xl bg-white border border-zinc-200">
+              <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 border border-blue-100">
+                <span className="text-blue-600 font-bold text-xl">1</span>
+              </div>
+              <h3 className="text-xl font-bold text-zinc-900 mb-3">Install & Connect</h3>
+              <p className="text-zinc-500 leading-relaxed">Citizens install simple IoT water sensors in their local systems. These sensors automatically connect to the AquaTrust network.</p>
+            </div>
+            <div className="card p-8 rounded-3xl bg-white border border-zinc-200">
+              <div className="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 border border-indigo-100">
+                <span className="text-indigo-600 font-bold text-xl">2</span>
+              </div>
+              <h3 className="text-xl font-bold text-zinc-900 mb-3">AI Analysis</h3>
+              <p className="text-zinc-500 leading-relaxed">Our centralized AI engine analyzes the incoming telemetry in real-time, checking against compliance standards and predicting anomalies.</p>
+            </div>
+            <div className="card p-8 rounded-3xl bg-white border border-zinc-200">
+              <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center mb-6 border border-emerald-100">
+                <span className="text-emerald-600 font-bold text-xl">3</span>
+              </div>
+              <h3 className="text-xl font-bold text-zinc-900 mb-3">Actionable Insights</h3>
+              <p className="text-zinc-500 leading-relaxed">Both citizens and admins receive immediate alerts and actionable intelligence via their dedicated dashboards.</p>
+            </div>
+          </div>
+        </div>
         
         {/* Enterprise Live Status Marquee */}
         <div className="w-full mt-32 border-y border-zinc-200/60 bg-white/30 backdrop-blur-sm py-4 marquee-container animate-spring-up delay-500">
@@ -162,6 +187,29 @@ const LandingPage = () => {
           </div>
         </div>
       </main>
+
+      {/* Footer */}
+      <footer className="w-full border-t border-zinc-200/60 bg-white py-12 z-10 relative">
+        <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-zinc-900 flex items-center justify-center">
+              <Droplets className="text-white w-4 h-4" />
+            </div>
+            <span className="text-lg font-bold tracking-tight text-zinc-900">AquaTrust.</span>
+          </div>
+          
+          <div className="flex items-center gap-6 text-sm font-medium text-zinc-500">
+            <Link to="/reports" className="hover:text-zinc-900 transition-colors">Documentation</Link>
+            <Link to="/register" className="hover:text-zinc-900 transition-colors">Join Network</Link>
+            <a href="#" className="hover:text-zinc-900 transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-zinc-900 transition-colors">Terms of Service</a>
+          </div>
+          
+          <div className="text-sm text-zinc-400">
+            © {new Date().getFullYear()} AquaTrust. All rights reserved.
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

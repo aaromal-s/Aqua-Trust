@@ -9,6 +9,8 @@ import CitizenReporting from './pages/CitizenReporting';
 import Reports from './pages/Reports';
 import AdminPanel from './pages/AdminPanel';
 import Layout from './components/Layout';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route element={<Layout />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/quality" element={<WaterQuality />} />
