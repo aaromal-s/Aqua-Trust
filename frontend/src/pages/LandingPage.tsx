@@ -145,6 +145,22 @@ const LandingPage = () => {
 
           </div>
         </div>
+        
+        {/* Enterprise Live Status Marquee */}
+        <div className="w-full mt-32 border-y border-zinc-200/60 bg-white/30 backdrop-blur-sm py-4 marquee-container animate-spring-up delay-500">
+          <div className="animate-marquee flex items-center gap-16 text-sm font-semibold text-zinc-500">
+            {/* We duplicate the items to make the loop seamless */}
+            {[...Array(2)].map((_, i) => (
+              <div key={i} className="flex items-center gap-16">
+                <span className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div> Active Global Sensors: 14,204</span>
+                <span className="flex items-center gap-2">Processing: 1.2M Data Points/sec</span>
+                <span className="flex items-center gap-2">Global Accuracy Network: 99.98%</span>
+                <span className="flex items-center gap-2 text-blue-600">Trusted by 40+ Municipalities</span>
+                <span className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-indigo-500"></div> AI Models Online: 12</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </main>
     </div>
   );

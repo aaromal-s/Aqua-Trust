@@ -1,9 +1,39 @@
+import React, { useState, useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { Home, Droplets, Cpu, BrainCircuit, FileText, MessageSquare, ShieldAlert } from 'lucide-react';
+import { Home, Droplets, Cpu, BrainCircuit, FileText, MessageSquare, ShieldAlert, X } from 'lucide-react';
 
 const Layout = () => {
   const location = useLocation();
   const path = location.pathname;
+  
+  const [liveAlert, setLiveAlert] = useState<{id: number, message: string} | null>(null);
+
+  useEffect(() => {
+    const messages = [
+      "pH spike detected in Sector 7",
+      "Turbidity anomaly in River North",
+      "Sensor AQ-014 telemetry synced",
+      "Compliance report successfully generated",
+      "Predictive AI model recalibrated"
+    ];
+    
+    const interval = setInterval(() => {
+      // 60% chance to show an alert every 12 seconds
+      if (Math.random() > 0.4) {
+        setLiveAlert({
+          id: Date.now(),
+          message: messages[Math.floor(Math.random() * messages.length)]
+        });
+        
+        // Auto dismiss after 5 seconds
+        setTimeout(() => {
+          setLiveAlert(null);
+        }, 5000);
+      }
+    }, 12000);
+    
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="min-h-screen flex bg-[var(--background)] text-[var(--foreground)] relative">
@@ -38,6 +68,27 @@ const Layout = () => {
       <main className="flex-1 flex flex-col overflow-hidden bg-[#fafafa]">
         <Outlet />
       </main>
+
+      {/* Live Alert Toast System */}
+      <div className={`fixed bottom-6 right-6 z-50 transition-all duration-700 ease-in-out transform ${liveAlert ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0 pointer-events-none'}`}>
+        {liveAlert && (
+          <div className="card !p-4 flex items-center gap-4 bg-white/70 backdrop-blur-2xl border border-zinc-200 shadow-[0_8px_30px_rgb(0,0,0,0.06)] min-w-[320px]">
+            <div className="w-10 h-10 rounded-[10px] bg-indigo-50 border border-indigo-100 flex items-center justify-center">
+              <BrainCircuit className="w-5 h-5 text-indigo-600" />
+            </div>
+            <div className="flex-1">
+              <p className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
+                Aqua Intelligence
+              </p>
+              <p className="text-sm font-semibold text-zinc-800">{liveAlert.message}</p>
+            </div>
+            <button onClick={() => setLiveAlert(null)} className="text-zinc-400 hover:text-zinc-600 p-1">
+              <X size={16} />
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

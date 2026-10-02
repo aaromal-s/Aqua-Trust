@@ -1,19 +1,39 @@
+import React, { useState, useEffect } from 'react';
 import { Activity, Droplets, Cpu, ShieldAlert } from 'lucide-react';
 import WaterMap from '../components/WaterMap';
 import WaterQualityChart from '../components/WaterQualityChart';
 
 const Dashboard = () => {
+  const [metrics, setMetrics] = useState({
+    qualityScore: 87.4,
+    activeSensors: 142
+  });
+
+  useEffect(() => {
+    // Simulate real-time ticking telemetry data
+    const interval = setInterval(() => {
+      setMetrics(prev => ({
+        qualityScore: Math.min(100, Math.max(0, prev.qualityScore + (Math.random() * 0.4 - 0.2))),
+        activeSensors: prev.activeSensors + (Math.random() > 0.95 ? 1 : 0) - (Math.random() > 0.95 ? 1 : 0)
+      }));
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       {/* Header */}
       <header className="h-16 flex items-center justify-between px-6 z-10 header-panel">
         <h2 className="text-lg font-semibold">Water Intelligence Overview</h2>
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2 text-sm text-slate-500">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-            Live Data Active
+          <div className="flex items-center gap-2 text-sm text-emerald-600 font-semibold bg-emerald-50/50 px-3 py-1 rounded-[8px] border border-emerald-200">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            Live Telemetry Active
           </div>
-          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 border-2 border-[var(--border)] cursor-pointer"></div>
+          <div className="w-8 h-8 rounded-[8px] bg-gradient-to-br from-zinc-800 to-zinc-900 border border-zinc-700 shadow-sm cursor-pointer"></div>
         </div>
       </header>
 
@@ -22,10 +42,10 @@ const Dashboard = () => {
         
         {/* KPI Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-          <KpiCard title="Overall Water Quality" value="87/100" status="Good" trend="+2.4%" trendUp icon={<Droplets className="text-blue-400" />} />
-          <KpiCard title="Active Sensors" value="142" status="98% Online" trend="-2 offline" trendUp={false} icon={<Cpu className="text-green-400" />} />
-          <KpiCard title="Critical Alerts" value="3" status="Action Required" trend="New" trendUp={false} icon={<ShieldAlert className="text-red-400" />} isAlert />
-          <KpiCard title="System Health" value="Stable" status="All systems operational" icon={<Activity className="text-purple-400" />} />
+          <KpiCard title="Overall Water Quality" value={`${metrics.qualityScore.toFixed(2)}/100`} status="Optimal" trend="+2.4%" trendUp icon={<Droplets className="text-blue-500" />} />
+          <KpiCard title="Active Sensors" value={metrics.activeSensors.toString()} status="98% Online" trend="Stable" trendUp={true} icon={<Cpu className="text-emerald-500" />} />
+          <KpiCard title="Critical Alerts" value="3" status="Action Required" trend="New" trendUp={false} icon={<ShieldAlert className="text-red-500" />} isAlert />
+          <KpiCard title="System Health" value="Stable" status="All systems operational" icon={<Activity className="text-indigo-500" />} />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
