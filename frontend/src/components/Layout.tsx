@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { Home, Droplets, Cpu, BrainCircuit, FileText, MessageSquare, ShieldAlert, X, UserCircle, LogOut } from 'lucide-react';
+import { Home, Droplets, Cpu, BrainCircuit, FileText, MessageSquare, ShieldAlert, X, UserCircle, LogOut, Stethoscope } from 'lucide-react';
 import CommandMenu from './CommandMenu';
 import { useAuth } from '../context/AuthContext';
 
@@ -57,8 +57,9 @@ const Layout = () => {
               <SidebarItem icon={<Home size={18} />} label="Overview" path="/dashboard" active={path === '/dashboard'} />
               <SidebarItem icon={<Droplets size={18} />} label="Water Quality" path="/quality" active={path === '/quality'} />
               
-              <div className="px-3 py-2 text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-6">Analysis</div>
+              <div className="px-3 py-2 text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-6">Analysis & Health</div>
               <SidebarItem icon={<BrainCircuit size={18} />} label="Aqua Intelligence" path="/intelligence" active={path === '/intelligence'} />
+              <SidebarItem icon={<Stethoscope size={18} />} label="Aqua Doctor (AI)" path="/doctor" active={path === '/doctor'} />
               
               <div className="px-3 py-2 text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-6">Infrastructure</div>
               <SidebarItem icon={<Cpu size={18} />} label="Sensors" path="/sensors" active={path === '/sensors'} />
@@ -74,7 +75,8 @@ const Layout = () => {
               <SidebarItem icon={<Home size={18} />} label="My Dashboard" path="/dashboard" active={path === '/dashboard'} />
               <SidebarItem icon={<Cpu size={18} />} label="My Sensors" path="/sensors" active={path === '/sensors'} />
               
-              <div className="px-3 py-2 text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-6">Support</div>
+              <div className="px-3 py-2 text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-6">Community & Health</div>
+              <SidebarItem icon={<Stethoscope size={18} />} label="Aqua Doctor (AI)" path="/doctor" active={path === '/doctor'} />
               <SidebarItem icon={<MessageSquare size={18} />} label="Report Issue" path="/reporting" active={path === '/reporting'} />
             </>
           )}

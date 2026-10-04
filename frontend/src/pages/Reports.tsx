@@ -1,4 +1,5 @@
-import { FileText, Download, Calendar, BarChart, FileDown } from 'lucide-react';
+import { useState } from 'react';
+import { FileText, Download, Calendar, FileDown, Database, Code, CheckCircle2, Copy } from 'lucide-react';
 
 const reports = [
   { id: 'REP-1042', title: 'Monthly Water Quality Summary', date: 'Sep 2026', type: 'Monthly', status: 'Ready' },
@@ -7,84 +8,259 @@ const reports = [
   { id: 'REP-1039', title: 'Daily Sensor Health Check', date: 'Sep 30, 2026', type: 'Daily', status: 'Ready' },
 ];
 
-const Reports = () => {
+const standardsComparison = [
+  { parameter: 'pH Level', who: '6.5 – 8.5', epa: '6.5 – 8.5', current: '7.3 (Normal)', status: 'Compliant' },
+  { parameter: 'Turbidity', who: '< 4.0 NTU', epa: '< 1.0 NTU', current: '1.2 NTU', status: 'Compliant' },
+  { parameter: 'Free Chlorine', who: '0.2 – 2.0 mg/L', epa: '0.2 – 4.0 mg/L', current: '0.8 mg/L', status: 'Compliant' },
+  { parameter: 'Total Dissolved Solids (TDS)', who: '< 600 ppm', epa: '< 500 ppm', current: '154 ppm', status: 'Optimal' },
+  { parameter: 'Lead (Pb)', who: '< 0.01 mg/L', epa: '< 0.015 mg/L', current: '< 0.001 mg/L', status: 'Undetectable' },
+  { parameter: 'Nitrates', who: '< 50 mg/L', epa: '< 10 mg/L', current: '3.4 mg/L', status: 'Compliant' },
+];
+
+export const Reports = () => {
+  const [activeTab, setActiveTab] = useState<'standard' | 'opendata'>('standard');
+  const [copiedSnippet, setCopiedSnippet] = useState(false);
+
+  const handleDownloadDataset = (format: 'csv' | 'json') => {
+    const data = format === 'json' 
+      ? JSON.stringify({
+          source: 'Aqua-Trust Open Environmental Data Network',
+          timestamp: new Date().toISOString(),
+          zones: [
+            { id: 'SEC-04', name: 'Sector 4 Residential', score: 94, pH: 7.3, turbidity: 0.9, tds: 142 },
+            { id: 'NR-01', name: 'North River Basin', score: 68, pH: 6.7, turbidity: 4.8, tds: 320 },
+            { id: 'LE-02', name: 'Lake East Reservoir', score: 88, pH: 7.4, turbidity: 1.4, tds: 185 },
+          ]
+        }, null, 2)
+      : "ZoneID,Name,CompositeScore,pH,TurbidityNTU,TDSppm,Status\nSEC-04,Sector 4,94,7.3,0.9,142,Safe\nNR-01,North River,68,6.7,4.8,320,BoilAdvisory\nLE-02,Lake East,88,7.4,1.4,185,Safe\nES-03,Estuary South,42,5.4,16.2,640,Hazardous";
+
+    const blob = new Blob([data], { type: format === 'json' ? 'application/json' : 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `aquatrust_water_telemetry_${Date.now()}.${format}`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleCopyCode = () => {
+    navigator.clipboard.writeText(`curl -X GET "https://api.aquatrust.org/v1/telemetry/public" \\\n  -H "Accept: application/json"`);
+    setCopiedSnippet(true);
+    setTimeout(() => setCopiedSnippet(false), 2000);
+  };
+
   return (
     <div className="flex-1 flex flex-col overflow-hidden bg-[var(--background)]">
-      <header className="h-16 flex items-center justify-between px-6 z-10 header-panel">
-        <h2 className="text-lg font-semibold flex items-center gap-2">
-          <FileText className="w-5 h-5 text-slate-500" /> Professional Reports
-        </h2>
-        <button className="px-4 py-2 rounded-lg bg-slate-900/10 hover:bg-slate-900/10 text-slate-900 text-sm font-medium transition-colors flex items-center gap-2">
-          <BarChart className="w-4 h-4" /> Custom Report
-        </button>
+      {/* Header */}
+      <header className="h-16 flex items-center justify-between px-6 z-10 header-panel border-b border-zinc-200/80 bg-white/70 backdrop-blur-md">
+        <div className="flex items-center gap-2">
+          <FileText className="w-5 h-5 text-blue-600" />
+          <h2 className="text-base font-bold text-zinc-900">Reports & Transparency Portal</h2>
+        </div>
+
+        {/* Tab Toggle */}
+        <div className="flex items-center gap-1 bg-zinc-100 p-1 rounded-xl border border-zinc-200">
+          <button
+            onClick={() => setActiveTab('standard')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              activeTab === 'standard' ? 'bg-white text-zinc-900 shadow-sm' : 'text-zinc-500 hover:text-zinc-900'
+            }`}
+          >
+            Compliance Reports
+          </button>
+          <button
+            onClick={() => setActiveTab('opendata')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
+              activeTab === 'opendata' ? 'bg-white text-zinc-900 shadow-sm' : 'text-zinc-500 hover:text-zinc-900'
+            }`}
+          >
+            <Database className="w-3.5 h-3.5 text-blue-600" /> Open Data for Researchers
+          </button>
+        </div>
       </header>
 
       <div className="flex-1 overflow-y-auto p-6">
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="card border-blue-500/20 bg-blue-500/5 cursor-pointer hover:bg-blue-500/10 transition-colors">
-            <h3 className="text-lg font-bold text-slate-900 mb-2">Daily Summary</h3>
-            <p className="text-sm text-slate-500 mb-4">Generate standard 24h water quality metrics.</p>
-            <button className="flex items-center gap-2 text-blue-400 text-sm font-semibold">
-              <Download className="w-4 h-4" /> Generate PDF
-            </button>
-          </div>
-          <div className="card cursor-pointer hover:bg-slate-900/5 transition-colors">
-            <h3 className="text-lg font-bold text-slate-900 mb-2">Weekly Assessment</h3>
-            <p className="text-sm text-slate-500 mb-4">Full breakdown of trends, alerts, and locations.</p>
-            <button className="flex items-center gap-2 text-slate-900/70 text-sm font-semibold">
-              <Download className="w-4 h-4" /> Generate PDF
-            </button>
-          </div>
-          <div className="card cursor-pointer hover:bg-slate-900/5 transition-colors">
-            <h3 className="text-lg font-bold text-slate-900 mb-2">Location Report</h3>
-            <p className="text-sm text-slate-500 mb-4">Detailed analysis for a specific monitoring zone.</p>
-            <button className="flex items-center gap-2 text-slate-900/70 text-sm font-semibold">
-              <Download className="w-4 h-4" /> Generate PDF
-            </button>
-          </div>
-        </div>
+        <div className="max-w-5xl mx-auto space-y-8">
+          
+          {activeTab === 'standard' ? (
+            /* COMPLIANCE & INCIDENT REPORTS */
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="card !p-5 border-blue-500/20 bg-blue-50/40 rounded-2xl hover:bg-blue-50/70 transition-colors">
+                  <h3 className="text-base font-bold text-zinc-900 mb-1">Daily Public Summary</h3>
+                  <p className="text-xs text-zinc-600 mb-4">Standard 24h water quality metrics for city distribution.</p>
+                  <button 
+                    onClick={() => handleDownloadDataset('json')}
+                    className="flex items-center gap-2 text-blue-600 text-xs font-bold hover:text-blue-700"
+                  >
+                    <Download className="w-4 h-4" /> Download PDF Summary
+                  </button>
+                </div>
 
-        <h3 className="font-semibold mb-4 text-lg flex items-center gap-2">
-          <Calendar className="w-5 h-5 text-slate-400" /> Recent Generated Reports
-        </h3>
-        
-        <div className="card p-0 overflow-hidden">
-          <table className="w-full text-left text-sm">
-            <thead className="bg-slate-900/5 border-b border-[var(--border)]">
-              <tr>
-                <th className="px-6 py-4 font-medium text-slate-500">Report ID</th>
-                <th className="px-6 py-4 font-medium text-slate-500">Title</th>
-                <th className="px-6 py-4 font-medium text-slate-500">Period</th>
-                <th className="px-6 py-4 font-medium text-slate-500">Type</th>
-                <th className="px-6 py-4 font-medium text-slate-500 text-right">Download</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[var(--border)]">
-              {reports.map((report) => (
-                <tr key={report.id} className="hover:bg-slate-900/5 transition-colors">
-                  <td className="px-6 py-4 font-medium text-slate-500">{report.id}</td>
-                  <td className="px-6 py-4 font-semibold text-slate-900">{report.title}</td>
-                  <td className="px-6 py-4 text-slate-500">{report.date}</td>
-                  <td className="px-6 py-4">
-                    <span className="px-2 py-1 bg-slate-900/10 rounded text-xs text-slate-600">{report.type}</span>
-                  </td>
-                  <td className="px-6 py-4 text-right">
-                    <div className="flex justify-end gap-3">
-                      <button className="text-slate-500 hover:text-slate-900 transition-colors" title="Download PDF">
-                        <FileDown className="w-5 h-5" />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+                <div className="card !p-5 bg-white border border-zinc-200 rounded-2xl hover:bg-zinc-50 transition-colors">
+                  <h3 className="text-base font-bold text-zinc-900 mb-1">Weekly Watershed Audit</h3>
+                  <p className="text-xs text-zinc-600 mb-4">Full breakdown of regional trends, incidents, and filtration health.</p>
+                  <button 
+                    onClick={() => handleDownloadDataset('json')}
+                    className="flex items-center gap-2 text-zinc-700 text-xs font-bold hover:text-zinc-900"
+                  >
+                    <Download className="w-4 h-4" /> Download PDF Audit
+                  </button>
+                </div>
 
+                <div className="card !p-5 bg-white border border-zinc-200 rounded-2xl hover:bg-zinc-50 transition-colors">
+                  <h3 className="text-base font-bold text-zinc-900 mb-1">Zone Incident Deep-Dive</h3>
+                  <p className="text-xs text-zinc-600 mb-4">Laboratory chemical assays and anomaly telemetry timelines.</p>
+                  <button 
+                    onClick={() => handleDownloadDataset('json')}
+                    className="flex items-center gap-2 text-zinc-700 text-xs font-bold hover:text-zinc-900"
+                  >
+                    <Download className="w-4 h-4" /> Download PDF Log
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="font-bold text-base text-zinc-900 mb-4 flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-zinc-500" /> Historical Reports Archive
+                </h3>
+                
+                <div className="card !p-0 overflow-hidden bg-white border border-zinc-200 rounded-2xl shadow-sm">
+                  <table className="w-full text-left text-xs">
+                    <thead className="bg-zinc-50 border-b border-zinc-200">
+                      <tr>
+                        <th className="px-6 py-3.5 font-bold text-zinc-500 uppercase tracking-wider">Report ID</th>
+                        <th className="px-6 py-3.5 font-bold text-zinc-500 uppercase tracking-wider">Title</th>
+                        <th className="px-6 py-3.5 font-bold text-zinc-500 uppercase tracking-wider">Period</th>
+                        <th className="px-6 py-3.5 font-bold text-zinc-500 uppercase tracking-wider">Type</th>
+                        <th className="px-6 py-3.5 font-bold text-zinc-500 uppercase tracking-wider text-right">Download</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-zinc-100">
+                      {reports.map((report) => (
+                        <tr key={report.id} className="hover:bg-zinc-50/60 transition-colors">
+                          <td className="px-6 py-4 font-mono font-semibold text-blue-600">{report.id}</td>
+                          <td className="px-6 py-4 font-semibold text-zinc-800">{report.title}</td>
+                          <td className="px-6 py-4 text-zinc-500">{report.date}</td>
+                          <td className="px-6 py-4">
+                            <span className="px-2.5 py-1 bg-zinc-100 text-zinc-700 rounded-md font-semibold text-[11px]">
+                              {report.type}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 text-right">
+                            <button 
+                              onClick={() => handleDownloadDataset('json')}
+                              className="text-zinc-400 hover:text-zinc-800 transition-colors p-1"
+                              title="Download PDF"
+                            >
+                              <FileDown className="w-4 h-4" />
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </>
+          ) : (
+            /* OPEN DATA & RESEARCH HUB */
+            <div className="space-y-6">
+              
+              {/* Data Export Hero */}
+              <div className="card !p-6 bg-gradient-to-br from-zinc-900 to-zinc-800 text-white rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div>
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-semibold mb-2">
+                    <Database className="w-3.5 h-3.5" /> Public Open Data License (CC-BY 4.0)
+                  </div>
+                  <h3 className="text-xl font-bold mb-1">Download Free Water Telemetry Datasets</h3>
+                  <p className="text-zinc-300 text-xs max-w-lg leading-relaxed">
+                    Designed for university researchers, environmental journalists, and school science programs. Anonymized 30-day continuous sensor readings with full sensor calibration metadata.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-3">
+                  <button
+                    onClick={() => handleDownloadDataset('csv')}
+                    className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs transition-colors flex items-center gap-2 shadow-md shadow-blue-500/20"
+                  >
+                    <Download className="w-4 h-4" /> Download CSV (.csv)
+                  </button>
+                  <button
+                    onClick={() => handleDownloadDataset('json')}
+                    className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs border border-white/20 transition-colors flex items-center gap-2"
+                  >
+                    <Download className="w-4 h-4" /> Download JSON (.json)
+                  </button>
+                </div>
+              </div>
+
+              {/* Standards Comparison Table */}
+              <div className="card !p-6 bg-white border border-zinc-200 rounded-2xl shadow-sm">
+                <h4 className="text-sm font-bold text-zinc-900 uppercase tracking-wider mb-1">
+                  Global Water Quality Standards Matrix
+                </h4>
+                <p className="text-xs text-zinc-500 mb-4">
+                  How our current regional telemetry compares against World Health Organization (WHO) and US EPA Maximum Contaminant Levels:
+                </p>
+
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs">
+                    <thead className="bg-zinc-50 border-y border-zinc-200">
+                      <tr>
+                        <th className="px-4 py-3 font-bold text-zinc-600">Chemical Parameter</th>
+                        <th className="px-4 py-3 font-bold text-zinc-600">WHO Guideline</th>
+                        <th className="px-4 py-3 font-bold text-zinc-600">US EPA Standard</th>
+                        <th className="px-4 py-3 font-bold text-zinc-600">AquaTrust Measured</th>
+                        <th className="px-4 py-3 font-bold text-zinc-600 text-right">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-zinc-100">
+                      {standardsComparison.map((row) => (
+                        <tr key={row.parameter} className="hover:bg-zinc-50/50">
+                          <td className="px-4 py-3 font-semibold text-zinc-800">{row.parameter}</td>
+                          <td className="px-4 py-3 text-zinc-500 font-mono">{row.who}</td>
+                          <td className="px-4 py-3 text-zinc-500 font-mono">{row.epa}</td>
+                          <td className="px-4 py-3 font-bold text-zinc-900 font-mono">{row.current}</td>
+                          <td className="px-4 py-3 text-right">
+                            <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-700">
+                              {row.status}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Developer / Researcher API Snippet */}
+              <div className="card !p-5 bg-zinc-900 text-white rounded-2xl">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2">
+                    <Code className="w-4 h-4 text-blue-400" />
+                    <span className="text-xs font-mono text-zinc-300 font-bold">Public REST API (Live Feed Endpoint)</span>
+                  </div>
+                  <button
+                    onClick={handleCopyCode}
+                    className="flex items-center gap-1.5 text-xs text-zinc-400 hover:text-white transition-colors bg-white/5 px-2.5 py-1 rounded-lg border border-white/10"
+                  >
+                    {copiedSnippet ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                    {copiedSnippet ? 'Copied!' : 'Copy cURL'}
+                  </button>
+                </div>
+                <pre className="text-xs font-mono text-zinc-400 bg-black/40 p-3.5 rounded-xl overflow-x-auto">
+{`curl -X GET "https://api.aquatrust.org/v1/telemetry/public" \\
+  -H "Accept: application/json"`}
+                </pre>
+              </div>
+
+            </div>
+          )}
+
+        </div>
       </div>
     </div>
   );
 };
-
 export default Reports;

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Home, Droplets, BrainCircuit, FileText, Cpu, ShieldAlert, X } from 'lucide-react';
+import { Search, Home, Droplets, BrainCircuit, FileText, Cpu, ShieldAlert, X, Stethoscope, MessageSquare } from 'lucide-react';
 
 const CommandMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,10 +23,13 @@ const CommandMenu = () => {
 
   const commands = [
     { name: 'Dashboard Overview', path: '/dashboard', icon: <Home className="w-4 h-4 text-zinc-400" /> },
+    { name: 'Is My Water Safe? (Pincode Checker)', path: '/', icon: <Droplets className="w-4 h-4 text-blue-500" /> },
+    { name: 'Aqua Doctor (AI Tap Diagnostics)', path: '/doctor', icon: <Stethoscope className="w-4 h-4 text-blue-600" /> },
+    { name: 'Citizen Issue Reports & Tracker', path: '/reporting', icon: <MessageSquare className="w-4 h-4 text-emerald-500" /> },
     { name: 'Water Quality Telemetry', path: '/quality', icon: <Droplets className="w-4 h-4 text-blue-400" /> },
     { name: 'Aqua Intelligence (AI)', path: '/intelligence', icon: <BrainCircuit className="w-4 h-4 text-indigo-400" /> },
     { name: 'Hardware & Sensors', path: '/sensors', icon: <Cpu className="w-4 h-4 text-emerald-400" /> },
-    { name: 'Compliance Reports', path: '/reports', icon: <FileText className="w-4 h-4 text-zinc-400" /> },
+    { name: 'Open Data & Reports', path: '/reports', icon: <FileText className="w-4 h-4 text-zinc-400" /> },
     { name: 'Active Alerts', path: '/reporting', icon: <ShieldAlert className="w-4 h-4 text-red-400" /> },
   ];
 

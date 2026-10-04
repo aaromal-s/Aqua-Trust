@@ -11,6 +11,7 @@ import AdminPanel from './pages/AdminPanel';
 import Layout from './components/Layout';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import WaterDoctor from './pages/WaterDoctor';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/quality" element={<WaterQuality />} />
             <Route path="/sensors" element={<SensorManagement />} />
             <Route path="/intelligence" element={<AquaIntelligence />} />
+            <Route path="/doctor" element={<WaterDoctor />} />
             <Route path="/reporting" element={<CitizenReporting />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/admin" element={<AdminPanel />} />
