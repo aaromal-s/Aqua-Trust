@@ -2,6 +2,10 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Droplets, Map, BarChart3, ShieldAlert, ArrowRight, Stethoscope, Award, HeartHandshake, Users, Check, Sparkles, MessageSquare } from 'lucide-react';
 import LocalitySafetyChecker from '../components/LocalitySafetyChecker';
+import WaterComparisonScrubber from '../components/WaterComparisonScrubber';
+import WaterIQChallenge from '../components/WaterIQChallenge';
+import LiveCommunityTicker from '../components/LiveCommunityTicker';
+import SensorNodeExplorer from '../components/SensorNodeExplorer';
 
 const communityGuardians = [
   { name: 'Dr. Sarah Lin', role: 'Watershed Biologist', points: '1,420 pts', badge: 'Master Ranger', reports: 34 },
@@ -55,7 +59,7 @@ export const LandingPage = () => {
       </div>
       
       {/* Navbar */}
-      <nav className="w-full py-5 px-8 flex justify-between items-center z-10 header-panel animate-spring-up">
+      <nav className="w-full py-5 px-6 md:px-8 flex justify-between items-center z-10 header-panel animate-spring-up">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-[10px] bg-zinc-900 flex items-center justify-center shadow-md">
             <Droplets className="text-white w-5 h-5" />
@@ -65,10 +69,12 @@ export const LandingPage = () => {
           </span>
         </div>
         
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
+        <div className="hidden lg:flex items-center gap-7 text-sm font-medium text-zinc-600">
           <a href="#safety-checker" className="hover:text-blue-600 transition-colors flex items-center gap-1 font-semibold text-blue-600">
             <Droplets className="w-3.5 h-3.5" /> Check My Water
           </a>
+          <a href="#visual-scrubber" className="hover:text-zinc-900 transition-colors">Visual Scrubber</a>
+          <a href="#water-iq" className="hover:text-zinc-900 transition-colors">Water IQ Quiz</a>
           <Link to="/doctor" className="hover:text-zinc-900 transition-colors flex items-center gap-1">
             <Stethoscope className="w-3.5 h-3.5 text-blue-500" /> Aqua Doctor
           </Link>
@@ -76,10 +82,9 @@ export const LandingPage = () => {
             <MessageSquare className="w-3.5 h-3.5 text-emerald-500" /> Report Hazard
           </Link>
           <Link to="/dashboard" className="hover:text-zinc-900 transition-colors">Live Map</Link>
-          <Link to="/reports" className="hover:text-zinc-900 transition-colors">Open Data</Link>
         </div>
         
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 md:gap-4">
           <Link to="/login" className="text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors">
             Sign In
           </Link>
@@ -90,25 +95,25 @@ export const LandingPage = () => {
       </nav>
 
       {/* Hero Section */}
-      <main className="flex-1 flex flex-col items-center justify-center text-center px-4 z-10 pt-20 pb-16">
+      <main className="flex-1 flex flex-col items-center justify-center text-center px-4 z-10 pt-16 pb-12">
         
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-zinc-200 text-zinc-700 text-[11px] font-semibold tracking-widest uppercase mb-8 animate-spring-up delay-100 shadow-sm">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-zinc-200 text-zinc-700 text-[11px] font-semibold tracking-widest uppercase mb-6 animate-spring-up delay-100 shadow-sm">
           <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-          Community Environmental Telemetry
+          Interactive Hydrology & Community Intelligence
         </div>
         
-        <h1 className="text-5xl md:text-[76px] font-bold tracking-tighter mb-6 max-w-5xl leading-[1.05] text-zinc-900 animate-spring-up delay-200">
+        <h1 className="text-4xl sm:text-5xl md:text-[76px] font-bold tracking-tighter mb-6 max-w-5xl leading-[1.05] text-zinc-900 animate-spring-up delay-200">
           Clean Water Trust. <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-zinc-800">
             Transparent for Every Citizen.
           </span>
         </h1>
         
-        <p className="text-lg md:text-xl text-zinc-600 max-w-2xl mb-10 leading-relaxed font-medium animate-spring-up delay-300">
+        <p className="text-base md:text-xl text-zinc-600 max-w-2xl mb-8 leading-relaxed font-medium animate-spring-up delay-300">
           Transforming complex municipal hydrology into plain-English health guidance, interactive tap diagnostics, and community-driven pollution response.
         </p>
         
-        <div className="flex flex-col sm:flex-row items-center gap-4 animate-spring-up delay-400 mb-16">
+        <div className="flex flex-col sm:flex-row items-center gap-4 animate-spring-up delay-400 mb-8">
           <a href="#safety-checker" className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 shadow-md shadow-blue-500/20">
             <Droplets className="w-4 h-4" /> Check My Tap Water Now
           </a>
@@ -117,51 +122,31 @@ export const LandingPage = () => {
           </Link>
         </div>
 
-        {/* Feature 1: Locality / Pincode Drinkability Checker Widget */}
+        {/* 1. Live Community Impact Ticker & Odometer */}
+        <LiveCommunityTicker />
+
+        {/* 2. Feature: Locality / Pincode Drinkability Checker Widget */}
         <div id="safety-checker" className="w-full px-4 scroll-mt-24">
           <LocalitySafetyChecker />
         </div>
 
-        {/* Hero Visual Mockup */}
-        <div className="mt-16 w-full max-w-5xl relative animate-spring-up delay-500">
-          <div className="absolute inset-0 bg-gradient-to-t from-[var(--background)] via-transparent to-transparent z-10 bottom-[-2px] h-[150%]" />
-          
-          <div className="card rounded-t-3xl p-4 md:p-10 border-b-0 flex flex-col md:flex-row gap-8 items-center justify-center relative overflow-hidden">
-            <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-80" />
-            
-            {/* Visual Nodes */}
-            <div className="flex flex-col items-center gap-4 z-20 relative group cursor-pointer">
-              <div className="w-16 h-16 rounded-2xl bg-zinc-50 border border-zinc-200 flex items-center justify-center btn-secondary relative z-10">
-                <Map className="w-6 h-6 text-zinc-700" />
-              </div>
-              <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Citizen Reports</span>
-            </div>
-            
-            <ArrowRight className="text-zinc-300 hidden md:block z-20" />
-            
-            <div className="flex flex-col items-center gap-4 z-20 relative group cursor-pointer">
-              <div className="w-16 h-16 rounded-2xl bg-zinc-50 border border-zinc-200 flex items-center justify-center btn-secondary relative z-10">
-                <BarChart3 className="w-6 h-6 text-indigo-600" />
-              </div>
-              <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">AI Chemistry Analytics</span>
-            </div>
-            
-            <ArrowRight className="text-zinc-300 hidden md:block z-20" />
-            
-            <div className="flex flex-col items-center gap-4 relative z-20 group cursor-pointer">
-              <div className="absolute -top-1.5 -right-1.5 w-3.5 h-3.5 bg-red-500 rounded-full animate-ping opacity-75 z-30" />
-              <div className="absolute -top-1.5 -right-1.5 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-white z-30" />
-              <div className="w-16 h-16 rounded-2xl bg-zinc-50 border border-zinc-200 flex items-center justify-center btn-secondary relative z-10">
-                <ShieldAlert className="w-6 h-6 text-red-600" />
-              </div>
-              <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Emergency Action</span>
-            </div>
-
-          </div>
+        {/* 3. Interactive Split Scrubber (Clean vs. Contaminated) */}
+        <div id="visual-scrubber" className="w-full px-4 scroll-mt-24">
+          <WaterComparisonScrubber />
         </div>
 
-        {/* Feature: Community Water Guardians & Adopt A Water Body */}
-        <div className="mt-28 w-full max-w-5xl px-4 text-left">
+        {/* 4. Gamified 15-Second Water IQ Challenge */}
+        <div id="water-iq" className="w-full px-4 scroll-mt-24">
+          <WaterIQChallenge />
+        </div>
+
+        {/* 5. 3D IoT Hardware Telemetry Node Explorer */}
+        <div className="w-full px-4">
+          <SensorNodeExplorer />
+        </div>
+
+        {/* 6. Feature: Community Water Guardians & Adopt A Water Body */}
+        <div className="mt-20 w-full max-w-5xl px-4 text-left">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
             <div>
               <div className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md mb-2">
@@ -247,6 +232,44 @@ export const LandingPage = () => {
           </div>
         </div>
 
+        {/* Hero Visual Mockup */}
+        <div className="mt-16 w-full max-w-5xl relative animate-spring-up delay-500">
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--background)] via-transparent to-transparent z-10 bottom-[-2px] h-[150%]" />
+          
+          <div className="card rounded-t-3xl p-4 md:p-10 border-b-0 flex flex-col md:flex-row gap-8 items-center justify-center relative overflow-hidden">
+            <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-80" />
+            
+            {/* Visual Nodes */}
+            <div className="flex flex-col items-center gap-4 z-20 relative group cursor-pointer">
+              <div className="w-16 h-16 rounded-2xl bg-zinc-50 border border-zinc-200 flex items-center justify-center btn-secondary relative z-10">
+                <Map className="w-6 h-6 text-zinc-700" />
+              </div>
+              <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Citizen Reports</span>
+            </div>
+            
+            <ArrowRight className="text-zinc-300 hidden md:block z-20" />
+            
+            <div className="flex flex-col items-center gap-4 z-20 relative group cursor-pointer">
+              <div className="w-16 h-16 rounded-2xl bg-zinc-50 border border-zinc-200 flex items-center justify-center btn-secondary relative z-10">
+                <BarChart3 className="w-6 h-6 text-indigo-600" />
+              </div>
+              <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">AI Chemistry Analytics</span>
+            </div>
+            
+            <ArrowRight className="text-zinc-300 hidden md:block z-20" />
+            
+            <div className="flex flex-col items-center gap-4 relative z-20 group cursor-pointer">
+              <div className="absolute -top-1.5 -right-1.5 w-3.5 h-3.5 bg-red-500 rounded-full animate-ping opacity-75 z-30" />
+              <div className="absolute -top-1.5 -right-1.5 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-white z-30" />
+              <div className="w-16 h-16 rounded-2xl bg-zinc-50 border border-zinc-200 flex items-center justify-center btn-secondary relative z-10">
+                <ShieldAlert className="w-6 h-6 text-red-600" />
+              </div>
+              <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Emergency Action</span>
+            </div>
+
+          </div>
+        </div>
+
         {/* Workflow Section */}
         <div className="mt-28 w-full max-w-6xl px-4 animate-spring-up delay-700 text-left">
           <div className="text-center mb-12">
@@ -308,6 +331,7 @@ export const LandingPage = () => {
           
           <div className="flex flex-wrap items-center gap-6 text-xs font-medium text-zinc-500">
             <Link to="/doctor" className="hover:text-zinc-900 transition-colors">Aqua Doctor</Link>
+            <Link to="/calculator" className="hover:text-zinc-900 transition-colors">Water Calculator</Link>
             <Link to="/reporting" className="hover:text-zinc-900 transition-colors">Issue Tracker</Link>
             <Link to="/reports" className="hover:text-zinc-900 transition-colors">Open Data Portal</Link>
             <Link to="/dashboard" className="hover:text-zinc-900 transition-colors">Public Map</Link>
