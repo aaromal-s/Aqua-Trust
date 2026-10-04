@@ -12,6 +12,7 @@ import Layout from './components/Layout';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import WaterDoctor from './pages/WaterDoctor';
+import WaterCalculator from './pages/WaterCalculator';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/sensors" element={<SensorManagement />} />
             <Route path="/intelligence" element={<AquaIntelligence />} />
             <Route path="/doctor" element={<WaterDoctor />} />
+            <Route path="/calculator" element={<WaterCalculator />} />
             <Route path="/reporting" element={<CitizenReporting />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/admin" element={<AdminPanel />} />

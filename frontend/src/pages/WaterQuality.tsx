@@ -1,5 +1,6 @@
 import { Droplets, Activity, Droplet, Wind } from 'lucide-react';
 import WaterQualityChart from '../components/WaterQualityChart';
+import FilterRecommender from '../components/FilterRecommender';
 
 const WaterQuality = () => {
   return (
@@ -48,6 +49,11 @@ const WaterQuality = () => {
           <div className="h-[400px]">
              <WaterQualityChart />
           </div>
+        </div>
+
+        {/* Personalized Home Filter Guide */}
+        <div className="mb-6">
+          <FilterRecommender />
         </div>
         
       </div>

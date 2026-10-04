@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Home, Droplets, BrainCircuit, FileText, Cpu, ShieldAlert, X, Stethoscope, MessageSquare } from 'lucide-react';
+import { Search, Home, Droplets, BrainCircuit, FileText, Cpu, ShieldAlert, X, Stethoscope, MessageSquare, Calculator, Filter } from 'lucide-react';
 
 const CommandMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,6 +25,8 @@ const CommandMenu = () => {
     { name: 'Dashboard Overview', path: '/dashboard', icon: <Home className="w-4 h-4 text-zinc-400" /> },
     { name: 'Is My Water Safe? (Pincode Checker)', path: '/', icon: <Droplets className="w-4 h-4 text-blue-500" /> },
     { name: 'Aqua Doctor (AI Tap Diagnostics)', path: '/doctor', icon: <Stethoscope className="w-4 h-4 text-blue-600" /> },
+    { name: 'Water Footprint & Silent Leak Calculator', path: '/calculator', icon: <Calculator className="w-4 h-4 text-emerald-500" /> },
+    { name: 'Household Water Filter Guide', path: '/quality', icon: <Filter className="w-4 h-4 text-blue-500" /> },
     { name: 'Citizen Issue Reports & Tracker', path: '/reporting', icon: <MessageSquare className="w-4 h-4 text-emerald-500" /> },
     { name: 'Water Quality Telemetry', path: '/quality', icon: <Droplets className="w-4 h-4 text-blue-400" /> },
     { name: 'Aqua Intelligence (AI)', path: '/intelligence', icon: <BrainCircuit className="w-4 h-4 text-indigo-400" /> },
