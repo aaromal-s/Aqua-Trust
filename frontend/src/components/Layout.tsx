@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { Home, Droplets, Cpu, BrainCircuit, FileText, MessageSquare, ShieldAlert, X, UserCircle, LogOut } from 'lucide-react';
 import CommandMenu from './CommandMenu';

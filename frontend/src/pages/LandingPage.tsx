@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Droplets, Activity, Map, BarChart3, ShieldAlert, ArrowRight, ExternalLink } from 'lucide-react';
+import { Droplets, Map, BarChart3, ShieldAlert, ArrowRight, ExternalLink } from 'lucide-react';
 
 const LandingPage = () => {
   return (
