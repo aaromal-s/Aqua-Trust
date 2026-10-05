@@ -172,6 +172,38 @@
   width: 200%;
 }
 
+/* Hydro Chart Wave Animations */
+@keyframes wave-subtle-1 {
+  0% { transform: translateX(0) scaleY(1); }
+  50% { transform: translateX(-25%) scaleY(1.15); }
+  100% { transform: translateX(-50%) scaleY(1); }
+}
+
+@keyframes wave-subtle-2 {
+  0% { transform: translateX(-50%) scaleY(1.1); }
+  50% { transform: translateX(-25%) scaleY(0.9); }
+  100% { transform: translateX(0) scaleY(1.1); }
+}
+
+@keyframes hydro-aura-pulse {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.12); }
+}
+
+.animate-hydro-wave-1 {
+  animation: wave-subtle-1 22s ease-in-out infinite;
+  width: 200%;
+}
+
+.animate-hydro-wave-2 {
+  animation: wave-subtle-2 15s ease-in-out infinite;
+  width: 200%;
+}
+
+.animate-hydro-pulse {
+  animation: hydro-aura-pulse 7s ease-in-out infinite;
+}
+
 /* Sensor Sonar Ripple */
 @keyframes sonar-ripple {
   0% { transform: scale(1); opacity: 0.4; border-width: 1px; }
