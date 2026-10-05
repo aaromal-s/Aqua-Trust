@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { AlertTriangle, ShieldCheck, Droplets, Sparkles, Sliders } from 'lucide-react';
 
 export const WaterComparisonScrubber = () => {
@@ -6,25 +6,41 @@ export const WaterComparisonScrubber = () => {
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleMove = (clientX: number) => {
+  const handleMove = useCallback((clientX: number) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     const x = clientX - rect.left;
     const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
     setSliderPosition(percentage);
-  };
+  }, []);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (isDragging) {
-      handleMove(e.clientX);
-    }
-  };
+  useEffect(() => {
+    const handleGlobalMouseUp = () => setIsDragging(false);
+    const handleGlobalMouseMove = (e: MouseEvent) => {
+      if (isDragging) {
+        handleMove(e.clientX);
+      }
+    };
+    const handleGlobalTouchMove = (e: TouchEvent) => {
+      if (isDragging && e.touches.length > 0) {
+        handleMove(e.touches[0].clientX);
+      }
+    };
 
-  const handleTouchMove = (e: React.TouchEvent) => {
     if (isDragging) {
-      handleMove(e.touches[0].clientX);
+      window.addEventListener('mouseup', handleGlobalMouseUp);
+      window.addEventListener('mousemove', handleGlobalMouseMove);
+      window.addEventListener('touchend', handleGlobalMouseUp);
+      window.addEventListener('touchmove', handleGlobalTouchMove);
     }
-  };
+
+    return () => {
+      window.removeEventListener('mouseup', handleGlobalMouseUp);
+      window.removeEventListener('mousemove', handleGlobalMouseMove);
+      window.removeEventListener('touchend', handleGlobalMouseUp);
+      window.removeEventListener('touchmove', handleGlobalTouchMove);
+    };
+  }, [isDragging, handleMove]);
 
   return (
     <div className="w-full max-w-4xl mx-auto my-12">
@@ -43,13 +59,14 @@ export const WaterComparisonScrubber = () => {
       {/* Scrubber Container */}
       <div 
         ref={containerRef}
-        onMouseMove={handleMouseMove}
-        onTouchMove={handleTouchMove}
-        onMouseDown={() => setIsDragging(true)}
-        onMouseUp={() => setIsDragging(false)}
-        onTouchStart={() => setIsDragging(true)}
-        onTouchEnd={() => setIsDragging(false)}
-        onMouseLeave={() => setIsDragging(false)}
+        onMouseDown={(e) => {
+          setIsDragging(true);
+          handleMove(e.clientX);
+        }}
+        onTouchStart={(e) => {
+          setIsDragging(true);
+          if (e.touches.length > 0) handleMove(e.touches[0].clientX);
+        }}
         className="relative h-[340px] md:h-[400px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white select-none cursor-ew-resize bg-zinc-900"
       >
         {/* Layer 1: Right Side / Pure Water (AquaTrust Monitored) */}

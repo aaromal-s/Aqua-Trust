@@ -13,6 +13,7 @@ interface User {
 interface AuthContextType {
   currentUser: User;
   toggleRole: () => void;
+  setRole: (role: Role) => void;
 }
 
 const mockAdmin: User = {
@@ -37,8 +38,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setCurrentUser(prev => prev.role === 'admin' ? mockUser : mockAdmin);
   };
 
+  const setRole = (role: Role) => {
+    setCurrentUser(role === 'admin' ? mockAdmin : mockUser);
+  };
+
   return (
-    <AuthContext.Provider value={{ currentUser, toggleRole }}>
+    <AuthContext.Provider value={{ currentUser, toggleRole, setRole }}>
       {children}
     </AuthContext.Provider>
   );

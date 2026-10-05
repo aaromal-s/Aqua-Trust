@@ -4,13 +4,28 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { Droplets, Waves, AlertTriangle, Filter } from 'lucide-react';
 
-// Fix Leaflet default marker icon issue
-delete (L.Icon.Default.prototype as any)._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-});
+// High-performance vector DivIcon for Leaflet markers (no external CDN dependency)
+const createCustomMarkerIcon = (status: 'safe' | 'warning' | 'critical') => {
+  const bg = status === 'safe' ? '#10b981' : status === 'warning' ? '#f59e0b' : '#ef4444';
+  const ring = status === 'safe' ? 'rgba(16, 185, 129, 0.35)' : status === 'warning' ? 'rgba(245, 158, 11, 0.35)' : 'rgba(239, 68, 68, 0.45)';
+  const ping = status === 'critical' ? '<div style="position: absolute; inset: 0; border-radius: 9999px; background-color: ' + bg + '; opacity: 0.7; animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;"></div>' : '';
+
+  return L.divIcon({
+    className: 'custom-water-marker-icon',
+    iconSize: [28, 28],
+    iconAnchor: [14, 14],
+    popupAnchor: [0, -16],
+    html: `
+      <div style="position: relative; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;">
+        ${ping}
+        <div style="position: absolute; inset: 0; border-radius: 9999px; background-color: ${ring};"></div>
+        <div style="position: relative; width: 18px; height: 18px; border-radius: 9999px; background-color: ${bg}; border: 2.5px solid #ffffff; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.25); display: flex; align-items: center; justify-content: center;">
+          <div style="width: 5px; height: 5px; border-radius: 9999px; background-color: #ffffff;"></div>
+        </div>
+      </div>
+    `
+  });
+};
 
 interface MapPoint {
   id: string;
@@ -138,7 +153,7 @@ export const WaterMap = () => {
                 radius={350}
                 pathOptions={{ fillColor: getStatusColor(point.status), color: 'transparent', fillOpacity: 0.25 }}
               />
-              <Marker position={[point.lat, point.lng]}>
+              <Marker position={[point.lat, point.lng]} icon={createCustomMarkerIcon(point.status)}>
                 <Popup className="water-popup">
                   <div className="p-1 min-w-[220px]">
                     <div className="flex items-center justify-between border-b border-zinc-200 pb-2 mb-2">

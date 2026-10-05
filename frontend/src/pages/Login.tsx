@@ -5,14 +5,12 @@ import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { toggleRole } = useAuth();
+  const { setRole: setAuthRole, toggleRole } = useAuth();
   const [role, setRole] = useState<'citizen' | 'admin'>('citizen');
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would authenticate and then set the correct role
-    // For mockup, we'll force the role toggle if it doesn't match the selected tab
-    // Note: useAuth is currently mocked to toggle blindly, so we'll just navigate
+    setAuthRole(role === 'admin' ? 'admin' : 'user');
     navigate('/dashboard');
   };
 
