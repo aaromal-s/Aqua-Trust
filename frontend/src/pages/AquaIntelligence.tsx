@@ -4,9 +4,9 @@ const insights = [
   {
     id: 1,
     type: 'anomaly',
-    title: 'Turbidity Spike Detected',
-    description: 'Turbidity has increased 34% compared with the recent baseline at Station AQ-014. The monitoring station has been flagged for further observation.',
-    location: 'Lake East',
+    title: 'Catchment Silt Surge Detected',
+    description: 'Turbidity has increased 34% compared with the recent baseline at Station AQ-CHD-01. Sukhna Lake Northern Catchment has been flagged for sediment settling review.',
+    location: 'Sukhna Lake (Sector 1, Chandigarh)',
     confidence: 94,
     time: '2h ago',
     icon: <AlertTriangle className="text-yellow-400" />
@@ -14,19 +14,19 @@ const insights = [
   {
     id: 2,
     type: 'prediction',
-    title: 'Algal Bloom Risk Warning',
-    description: 'Based on rising temperatures (28°C) and elevated nutrient levels (Nitrate: 4.2mg/L), there is an 82% probability of an algal bloom developing in the next 72 hours in the Estuary South region.',
-    location: 'Estuary South',
-    confidence: 82,
+    title: 'Industrial Effluent Risk Warning',
+    description: 'Based on rising conductivity and chemical oxygen demand in Budha Nullah (Ludhiana), there is an 88% probability of severe oxygen depletion reaching the Sutlej river confluence within the next 48 hours.',
+    location: 'Budha Nullah (Ludhiana / Sutlej Confluence)',
+    confidence: 88,
     time: '5h ago',
     icon: <TrendingUp className="text-orange-400" />
   },
   {
     id: 3,
     type: 'insight',
-    title: 'Water Quality Stabilization',
-    description: 'Following recent rainfall, the pH levels in River North have stabilized back to the normal baseline (7.2). Dissolved Oxygen is steadily increasing.',
-    location: 'River North',
+    title: 'Kajauli Supply Line Stabilization',
+    description: 'Following regulated discharge from Bhakra Main Line, water chemistry at Kajauli Waterworks Phase 3 & 4 has stabilized back to optimal drinking baseline (pH 7.3, TDS 184 ppm).',
+    location: 'Kajauli Waterworks (Sector 39 Grid)',
     confidence: 98,
     time: '12h ago',
     icon: <Lightbulb className="text-blue-400" />

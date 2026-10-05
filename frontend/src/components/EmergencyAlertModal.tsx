@@ -7,7 +7,7 @@ interface EmergencyAlertModalProps {
   defaultZone?: string;
 }
 
-export const EmergencyAlertModal = ({ isOpen, onClose, defaultZone = 'Sector 4 - Residential' }: EmergencyAlertModalProps) => {
+export const EmergencyAlertModal = ({ isOpen, onClose, defaultZone = 'Sector 17 - Central Chandigarh' }: EmergencyAlertModalProps) => {
   const [method, setMethod] = useState<'sms' | 'email'>('sms');
   const [contact, setContact] = useState('');
   const [zone, setZone] = useState(defaultZone);
@@ -80,11 +80,12 @@ export const EmergencyAlertModal = ({ isOpen, onClose, defaultZone = 'Sector 4 -
                     onChange={(e) => setZone(e.target.value)}
                     className="w-full pl-9 pr-3 py-2 text-sm bg-zinc-50 border border-zinc-200 rounded-xl text-zinc-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                   >
-                    <option value="Sector 4 - Residential">Sector 4 - Residential Supply</option>
-                    <option value="94103 - Bay Area / Downtown">94103 - Bay Area / Downtown</option>
-                    <option value="North River Basin">North River Basin</option>
-                    <option value="Lake East District">Lake East District</option>
-                    <option value="Estuary South Aquifer">Estuary South Aquifer</option>
+                    <option value="Sector 17 - Central Chandigarh">Sector 17 - Central Chandigarh</option>
+                    <option value="Sukhna Lake Enclave (Sector 1)">Sukhna Lake Enclave (Sector 1)</option>
+                    <option value="SAS Nagar Mohali (Phase 3B2 - 7)">SAS Nagar Mohali (Phase 3B2 - 7)</option>
+                    <option value="Ludhiana Industrial (Budha Nullah)">Ludhiana Industrial (Budha Nullah)</option>
+                    <option value="Bathinda Malwa Aquifer">Bathinda Malwa Aquifer</option>
+                    <option value="Harike Wetland Sanctuary">Harike Wetland Sanctuary</option>
                   </select>
                 </div>
               </div>
@@ -128,7 +129,7 @@ export const EmergencyAlertModal = ({ isOpen, onClose, defaultZone = 'Sector 4 -
                 <input
                   required
                   type={method === 'sms' ? 'tel' : 'email'}
-                  placeholder={method === 'sms' ? '+1 (555) 234-5678' : 'resident@domain.com'}
+                  placeholder={method === 'sms' ? '+91 98765 43210' : 'resident@chandigarh.gov.in'}
                   value={contact}
                   onChange={(e) => setContact(e.target.value)}
                   className="w-full px-3.5 py-2 text-sm bg-zinc-50 border border-zinc-200 rounded-xl text-zinc-800 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"

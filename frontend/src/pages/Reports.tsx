@@ -2,19 +2,19 @@ import { useState } from 'react';
 import { FileText, Download, Calendar, FileDown, Database, Code, CheckCircle2, Copy } from 'lucide-react';
 
 const reports = [
-  { id: 'REP-1042', title: 'Monthly Water Quality Summary', date: 'Sep 2026', type: 'Monthly', status: 'Ready' },
-  { id: 'REP-1041', title: 'Weekly Incident & Alert Log', date: 'Sep 21-27, 2026', type: 'Weekly', status: 'Ready' },
-  { id: 'REP-1040', title: 'Estuary South Anomaly Report', date: 'Sep 24, 2026', type: 'Incident', status: 'Ready' },
-  { id: 'REP-1039', title: 'Daily Sensor Health Check', date: 'Sep 30, 2026', type: 'Daily', status: 'Ready' },
+  { id: 'REP-1042', title: 'Monthly Water Quality Summary (Tricity & Punjab)', date: 'Sep 2026', type: 'Monthly', status: 'Ready' },
+  { id: 'REP-1041', title: 'Weekly Incident & Alert Log (MC Chandigarh / PPCB)', date: 'Sep 21-27, 2026', type: 'Weekly', status: 'Ready' },
+  { id: 'REP-1040', title: 'Ludhiana Budha Nullah Effluent Incident Report', date: 'Sep 24, 2026', type: 'Incident', status: 'Ready' },
+  { id: 'REP-1039', title: 'Daily Sensor Health Check (Kajauli & Sukhna Grid)', date: 'Sep 30, 2026', type: 'Daily', status: 'Ready' },
 ];
 
 const standardsComparison = [
-  { parameter: 'pH Level', who: '6.5 – 8.5', epa: '6.5 – 8.5', current: '7.3 (Normal)', status: 'Compliant' },
-  { parameter: 'Turbidity', who: '< 4.0 NTU', epa: '< 1.0 NTU', current: '1.2 NTU', status: 'Compliant' },
-  { parameter: 'Free Chlorine', who: '0.2 – 2.0 mg/L', epa: '0.2 – 4.0 mg/L', current: '0.8 mg/L', status: 'Compliant' },
-  { parameter: 'Total Dissolved Solids (TDS)', who: '< 600 ppm', epa: '< 500 ppm', current: '154 ppm', status: 'Optimal' },
-  { parameter: 'Lead (Pb)', who: '< 0.01 mg/L', epa: '< 0.015 mg/L', current: '< 0.001 mg/L', status: 'Undetectable' },
-  { parameter: 'Nitrates', who: '< 50 mg/L', epa: '< 10 mg/L', current: '3.4 mg/L', status: 'Compliant' },
+  { parameter: 'pH Level', bis: '6.5 – 8.5', who: '6.5 – 8.5', current: '7.3 (Normal)', status: 'Compliant' },
+  { parameter: 'Turbidity', bis: '< 1.0 NTU (Max 5.0)', who: '< 4.0 NTU', current: '1.2 NTU', status: 'Compliant' },
+  { parameter: 'Free Residual Chlorine', bis: '0.2 – 1.0 mg/L', who: '0.2 – 2.0 mg/L', current: '0.8 mg/L', status: 'Compliant' },
+  { parameter: 'Total Dissolved Solids (TDS)', bis: '< 500 ppm', who: '< 600 ppm', current: '154 ppm', status: 'Optimal' },
+  { parameter: 'Lead (Pb)', bis: '< 0.01 mg/L', who: '< 0.01 mg/L', current: '< 0.001 mg/L', status: 'Undetectable' },
+  { parameter: 'Nitrates (NO3)', bis: '< 45 mg/L', who: '< 50 mg/L', current: '3.4 mg/L', status: 'Compliant' },
 ];
 
 export const Reports = () => {
@@ -27,12 +27,14 @@ export const Reports = () => {
           source: 'Aqua-Trust Open Environmental Data Network',
           timestamp: new Date().toISOString(),
           zones: [
-            { id: 'SEC-04', name: 'Sector 4 Residential', score: 94, pH: 7.3, turbidity: 0.9, tds: 142 },
-            { id: 'NR-01', name: 'North River Basin', score: 68, pH: 6.7, turbidity: 4.8, tds: 320 },
-            { id: 'LE-02', name: 'Lake East Reservoir', score: 88, pH: 7.4, turbidity: 1.4, tds: 185 },
+            { id: 'CHD-17', name: 'Sector 17 Central Commercial Grid, Chandigarh', score: 94, pH: 7.3, turbidity: 0.9, tds: 142 },
+            { id: 'CHD-SUK', name: 'Sukhna Lake Wetland Catchment, Chandigarh', score: 91, pH: 7.4, turbidity: 1.2, tds: 168 },
+            { id: 'MOH-70', name: 'SAS Nagar Mohali (Kajauli Feeder Line)', score: 87, pH: 7.2, turbidity: 1.5, tds: 210 },
+            { id: 'LUD-BN', name: 'Budha Nullah Industrial Confluence, Ludhiana', score: 36, pH: 5.8, turbidity: 18.4, tds: 840 },
+            { id: 'BTI-MLW', name: 'Bathinda Malwa Deep Aquifer', score: 48, pH: 7.9, turbidity: 3.2, tds: 680 }
           ]
         }, null, 2)
-      : "ZoneID,Name,CompositeScore,pH,TurbidityNTU,TDSppm,Status\nSEC-04,Sector 4,94,7.3,0.9,142,Safe\nNR-01,North River,68,6.7,4.8,320,BoilAdvisory\nLE-02,Lake East,88,7.4,1.4,185,Safe\nES-03,Estuary South,42,5.4,16.2,640,Hazardous";
+      : "ZoneID,Name,CompositeScore,pH,TurbidityNTU,TDSppm,Status\nCHD-17,Sector 17 Chandigarh,94,7.3,0.9,142,Safe\nCHD-SUK,Sukhna Lake Sector 1,91,7.4,1.2,168,Safe\nMOH-70,Mohali Sector 70,87,7.2,1.5,210,Safe\nLUD-BN,Budha Nullah Ludhiana,36,5.8,18.4,840,CriticalHazard\nBTI-MLW,Bathinda Malwa Basin,48,7.9,3.2,680,BoilAndFilter";
 
     const blob = new Blob([data], { type: format === 'json' ? 'application/json' : 'text/csv' });
     const url = URL.createObjectURL(blob);
@@ -198,10 +200,10 @@ export const Reports = () => {
               {/* Standards Comparison Table */}
               <div className="card !p-6 bg-white border border-zinc-200 rounded-2xl shadow-sm">
                 <h4 className="text-sm font-bold text-zinc-900 uppercase tracking-wider mb-1">
-                  Global Water Quality Standards Matrix
+                  Indian & Global Water Quality Standards Matrix
                 </h4>
                 <p className="text-xs text-zinc-500 mb-4">
-                  How our current regional telemetry compares against World Health Organization (WHO) and US EPA Maximum Contaminant Levels:
+                  How our current regional telemetry compares against Bureau of Indian Standards (BIS 10500:2012) and World Health Organization (WHO) Guidelines:
                 </p>
 
                 <div className="overflow-x-auto">
@@ -209,8 +211,8 @@ export const Reports = () => {
                     <thead className="bg-zinc-50 border-y border-zinc-200">
                       <tr>
                         <th className="px-4 py-3 font-bold text-zinc-600">Chemical Parameter</th>
+                        <th className="px-4 py-3 font-bold text-zinc-600">BIS 10500:2012 (India)</th>
                         <th className="px-4 py-3 font-bold text-zinc-600">WHO Guideline</th>
-                        <th className="px-4 py-3 font-bold text-zinc-600">US EPA Standard</th>
                         <th className="px-4 py-3 font-bold text-zinc-600">AquaTrust Measured</th>
                         <th className="px-4 py-3 font-bold text-zinc-600 text-right">Status</th>
                       </tr>
@@ -219,8 +221,8 @@ export const Reports = () => {
                       {standardsComparison.map((row) => (
                         <tr key={row.parameter} className="hover:bg-zinc-50/50">
                           <td className="px-4 py-3 font-semibold text-zinc-800">{row.parameter}</td>
+                          <td className="px-4 py-3 text-zinc-600 font-mono font-semibold">{row.bis}</td>
                           <td className="px-4 py-3 text-zinc-500 font-mono">{row.who}</td>
-                          <td className="px-4 py-3 text-zinc-500 font-mono">{row.epa}</td>
                           <td className="px-4 py-3 font-bold text-zinc-900 font-mono">{row.current}</td>
                           <td className="px-4 py-3 text-right">
                             <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-700">

@@ -8,15 +8,16 @@ import LiveCommunityTicker from '../components/LiveCommunityTicker';
 import SensorNodeExplorer from '../components/SensorNodeExplorer';
 
 const communityGuardians = [
-  { name: 'Dr. Sarah Lin', role: 'Watershed Biologist', points: '1,420 pts', badge: 'Master Ranger', reports: 34 },
-  { name: 'Marcus Vance', role: 'Sector 4 Community Lead', points: '1,180 pts', badge: 'Hydrology Guardian', reports: 28 },
-  { name: 'Elena Rostova', role: 'High School Eco-Club', points: '940 pts', badge: 'Stream Protector', reports: 19 },
+  { name: 'Dr. Harpreet Kaur', role: 'Punjab Water Resources Limnologist', points: '1,420 pts', badge: 'Master Hydrologist', reports: 34 },
+  { name: 'Gurjit Singh Dhillon', role: 'Sector 35-B Chandigarh RWA Lead', points: '1,180 pts', badge: 'Tricity Guardian', reports: 28 },
+  { name: 'Simranpreet Ahluwalia', role: 'PAU Ludhiana Eco-Club Volunteer', points: '940 pts', badge: 'Stream Protector', reports: 19 },
 ];
 
 const waterBodiesToAdopt = [
-  { name: 'Lake East Recreational Basin', stewards: '12 Active Stewards', status: 'Optimal Health', healthScore: '92%' },
-  { name: 'North River Tributary 4', stewards: '8 Active Stewards', status: 'Sediment Watch', healthScore: '68%' },
-  { name: 'Pine Creek Wetland Sanctuary', stewards: '15 Active Stewards', status: 'Clean & Safe', healthScore: '95%' },
+  { name: 'Sukhna Lake Wetland Reserve (Sector 1, Chandigarh)', stewards: '42 Active Stewards', status: 'Optimal Health (BIS Compliant)', healthScore: '94%' },
+  { name: 'Kajauli Waterworks Bhakra Feeder (Sector 39 Grid)', stewards: '28 Active Stewards', status: 'Continuous Supply Monitored', healthScore: '91%' },
+  { name: 'Harike Pattan Wetland (Sutlej-Beas Confluence)', stewards: '35 Active Stewards', status: 'Bio-Filter Sanctuary', healthScore: '86%' },
+  { name: 'Budha Nullah Clean Stream Initiative (Ludhiana)', stewards: '56 Active Stewards', status: 'Active Bioremediation Watch', healthScore: '54%' },
 ];
 
 export const LandingPage = () => {
@@ -310,7 +311,7 @@ export const LandingPage = () => {
               <div key={i} className="flex items-center gap-16">
                 <span className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div> Active Public Sensors: 14,204</span>
                 <span className="flex items-center gap-2">Data Processing: 1.2M Points/hr</span>
-                <span className="flex items-center gap-2">Clean Drinking Water Standards: 99.8% WHO Compliant</span>
+                <span className="flex items-center gap-2">Clean Drinking Water Standards: 99.8% BIS 10500:2012 & WHO Compliant</span>
                 <span className="flex items-center gap-2 text-blue-600">Open Data Network for Students & Researchers</span>
                 <span className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-indigo-500"></div> AI Diagnostic Models Active</span>
               </div>

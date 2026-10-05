@@ -17,43 +17,44 @@ const initialReports: IncidentReport[] = [
   {
     id: 'AQUA-1042',
     category: 'Turbid Water / Muddy Discharge',
-    location: 'Sector 4 Residential Block B',
-    description: 'Tap water running reddish-brown since 7 AM construction down the road.',
+    location: 'Sector 35-B Residential Grid, Chandigarh',
+    description: 'Tap water running reddish-brown since 7 AM pipeline maintenance near inner market.',
     status: 'resolved',
     submittedAt: '3 hours ago',
     upvotes: 14,
     severity: 'medium',
-    resolutionNote: 'Municipal line flush completed at 10:15 AM. Flow restored to safe WHO baseline.'
+    resolutionNote: 'MC Chandigarh Water Wing line flush completed at 10:15 AM. Flow restored to safe BIS 10500:2012 baseline.'
   },
   {
     id: 'AQUA-1041',
     category: 'Visible Algal Bloom / Scum',
-    location: 'Lake East Shoreline (Near Boat Ramp)',
-    description: 'Thick green film forming across shoreline; noxious odor detected.',
+    location: 'Sukhna Lake Shoreline (Near Rowing Canal)',
+    description: 'Thick green algae layer forming across northern inlet bank; mild organic odor detected.',
     status: 'inspecting',
     submittedAt: '5 hours ago',
     upvotes: 28,
     severity: 'high',
-    resolutionNote: 'Field team on-site taking spectrophotometer samples for microcystin toxins.'
+    resolutionNote: 'Chandigarh Environment Department field team on-site taking dissolved oxygen & spectrophotometer samples.'
   },
   {
     id: 'AQUA-1039',
-    category: 'Industrial Run-off / Oily Sheen',
-    location: 'Estuary South Bridge',
-    description: 'Iridescent chemical sheen floating downstream from local stormwater outlet.',
+    category: 'Industrial Run-off / Chemical Dyeing',
+    location: 'Budha Nullah Confluence, Ludhiana',
+    description: 'Dark industrial discharge detected upstream of treatment plant bypassing primary interceptor.',
     status: 'triaged',
     submittedAt: '12 hours ago',
-    upvotes: 9,
-    severity: 'high'
+    upvotes: 42,
+    severity: 'high',
+    resolutionNote: 'Punjab Pollution Control Board (PPCB) regional task force dispatched for spot inspection.'
   },
   {
     id: 'AQUA-1035',
-    category: 'Low Water Pressure & Strange Odor',
-    location: 'Pine Creek Community Center',
-    description: 'Water pressure dropped drastically and faint chlorine bleach odor noticeable.',
+    category: 'Low Water Pressure & High Mineral Silt',
+    location: 'Sector 70, SAS Nagar Mohali',
+    description: 'Kajauli Phase 4 supply feeder experiencing intermittent pressure drop with fine sandy sediment.',
     status: 'submitted',
     submittedAt: 'Yesterday',
-    upvotes: 4,
+    upvotes: 9,
     severity: 'low'
   }
 ];
@@ -77,7 +78,7 @@ export const CitizenReporting = () => {
   const handleLocationDetect = () => {
     setIsDetectingLocation(true);
     setTimeout(() => {
-      setLocation('Sector 4 - Latitude 51.505, Longitude -0.09');
+      setLocation('Sector 35-B Chandigarh - Lat 30.7333° N, Long 76.7794° E');
       setIsDetectingLocation(false);
     }, 800);
   };
@@ -247,7 +248,7 @@ export const CitizenReporting = () => {
                       <input
                         required
                         type="text"
-                        placeholder="e.g. Sector 4 Bridge or 94103 Street..."
+                        placeholder="e.g. Sector 35-B Chandigarh, Sukhna Lake, or 160017..."
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}
                         className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm text-zinc-800 focus:outline-none focus:border-blue-500"

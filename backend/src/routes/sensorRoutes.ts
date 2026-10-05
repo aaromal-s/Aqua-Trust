@@ -5,8 +5,10 @@ const router = Router();
 // Mock endpoints for sensors
 router.get('/', (req, res) => {
   res.json([
-    { id: 'AQ-001', location: 'River North', status: 'online' },
-    { id: 'AQ-014', location: 'Lake East', status: 'warning' }
+    { id: 'AQ-001', location: 'Sukhna Lake (Chandigarh)', status: 'online' },
+    { id: 'AQ-014', location: 'Kajauli Waterworks (Sector 39)', status: 'online' },
+    { id: 'AQ-022', location: 'Budha Nullah (Ludhiana)', status: 'warning' },
+    { id: 'AQ-035', location: 'Harike Wetland Sanctuary', status: 'online' }
   ]);
 });
 

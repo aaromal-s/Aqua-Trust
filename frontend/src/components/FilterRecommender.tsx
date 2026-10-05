@@ -20,21 +20,21 @@ export const FilterRecommender = () => {
   const getRecommendation = (): FilterOption => {
     if (primaryConcern === 'tds' || primaryConcern === 'lead') {
       return {
-        name: 'Multi-Stage Reverse Osmosis (RO) with Remineralization',
+        name: 'Multi-Stage Reverse Osmosis (RO) with Copper & Alkaline Remineralization',
         category: 'Under-Sink High Purity System',
-        bestFor: 'High dissolved solids (TDS > 250 ppm), lead, heavy metals, microplastics, fluorides, and PFAS forever-chemicals.',
-        costRange: '$180 – $280 (Self-installable)',
+        bestFor: 'High dissolved solids (TDS > 250 ppm common across Punjab & Malwa groundwater), heavy metals, agricultural nitrates, and fluorides.',
+        costRange: '₹12,000 – ₹18,000 (Standard Tricity installation)',
         replacementCycle: 'Pre-filters: 6 months | RO Membrane: 24 months',
-        removes: ['99.4% Heavy Metals (Lead, Arsenic)', '98% Total Dissolved Solids', '99.9% Microplastics', 'Chlorine & Chloramines'],
-        limitations: 'Produces minor wastewater ratio (approx. 1:1 with modern recovery valves); remineralizer cartridge recommended for natural taste.',
+        removes: ['99.4% Heavy Metals (Lead, Arsenic, Uranium trace)', '98% Total Dissolved Solids (TDS)', '99.9% Microplastics', 'Chlorine & Chloramines'],
+        limitations: 'Produces wastewater ratio (reusable for mopping and gardening); remineralizer cartridge recommended for natural sweet taste.',
         recommended: true
       };
     } else if (primaryConcern === 'hardness') {
       return {
         name: 'Dual-Tank Ion-Exchange Water Softener + Carbon Pre-Filter',
         category: 'Point-of-Entry Whole House Appliance',
-        bestFor: 'Chalky white mineral scale in kettles, ruined water heater coils, and dry skin/hair from excess calcium and magnesium.',
-        costRange: '$450 – $800',
+        bestFor: 'Chalky white mineral scale in geysers, ruined bathroom fittings, and dry skin/hair from excess calcium and magnesium salts.',
+        costRange: '₹28,000 – ₹45,000',
         replacementCycle: 'Add salt pellets monthly | Resin bed: 8–10 years',
         removes: ['100% Calcium Carbonate (Scale)', 'Magnesium Hardness', 'Iron (up to 2 ppm)'],
         limitations: 'Softens water for all household taps, but does not remove chemical contaminants or heavy metals on its own.',
@@ -44,10 +44,10 @@ export const FilterRecommender = () => {
       return {
         name: 'Ultrafiltration (UF) + 254nm Ultraviolet (UV) Germicidal Core',
         category: 'Bio-Sterilization System',
-        bestFor: 'Unchlorinated private wells, rural boreholes, and stormwater tanks vulnerable to E. coli and coliform bacteria.',
-        costRange: '$220 – $360',
+        bestFor: 'Private borewells, rural community tanks, and rooftop storage overheads vulnerable to monsoon microbial contamination.',
+        costRange: '₹8,500 – ₹14,000',
         replacementCycle: 'Sediment pre-filter: 3–6 months | UV Quartz Lamp: Annual replacement',
-        removes: ['99.99% Bacteria & Viruses', 'Giardia & Cryptosporidium Cysts', 'Turbidity Silt'],
+        removes: ['99.99% Bacteria & Viruses (E. coli, Coliform)', 'Giardia & Cryptosporidium Cysts', 'Turbidity Silt'],
         limitations: 'Requires steady electrical power to maintain active UV ultraviolet chamber.',
         recommended: true
       };
@@ -55,10 +55,10 @@ export const FilterRecommender = () => {
       return {
         name: 'Catalytic Coconut Carbon Block Micro-Filter (0.5 Micron)',
         category: 'Kitchen Faucet or Under-Sink Cartridge',
-        bestFor: 'Municipal chlorinated city tap water with chemical taste, pool-like odor, organic sediment, and microplastics.',
-        costRange: budget === 'pitcher' ? '$35 – $50' : '$75 – $120',
-        replacementCycle: 'Every 6 months or 800 gallons',
-        removes: ['99.1% Free Chlorine & Chloramines', 'Bad Chemical Taste & Odors', 'Sediment & Rust Particles', 'Preserves Healthy Minerals'],
+        bestFor: 'Municipal Kajauli/Chandigarh canal treated tap water with chlorine odor, pipe rust particles, and microplastics.',
+        costRange: budget === 'pitcher' ? '₹2,500 – ₹3,800' : '₹5,000 – ₹8,500',
+        replacementCycle: 'Every 6 months or 3,000 Litres',
+        removes: ['99.1% Free Chlorine & Chloramines', 'Bad Chemical Taste & Odors', 'Sediment & Rust Particles', 'Preserves Healthy Essential Minerals'],
         limitations: 'Does not alter TDS (Total Dissolved Solids) or soften very hard mineral water.',
         recommended: true
       };

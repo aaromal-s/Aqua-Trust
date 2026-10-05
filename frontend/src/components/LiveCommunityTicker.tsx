@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { Droplets, Recycle, Activity } from 'lucide-react';
 
 const livePings = [
-  { text: 'Resident in Sector 4 verified tap purity (Score: 98/100)', time: '4s ago', type: 'safe' },
-  { text: 'Metro Plaza Public Water ATM dispensed 42 reusable refills', time: '14s ago', type: 'refill' },
-  { text: 'Lake East Recreational Sensor: pH 7.4 baseline verified', time: '28s ago', type: 'sensor' },
-  { text: 'North River Field Inspector resolved sediment alert #AQUA-1042', time: '1m ago', type: 'dispatch' },
-  { text: 'High School Eco-Club pledged to monitor Pine Creek Wetland', time: '2m ago', type: 'adopt' }
+  { text: 'Resident in Sector 35-B Chandigarh verified tap purity (Score: 98/100 - BIS Compliant)', time: '4s ago', type: 'safe' },
+  { text: 'Sector 17 Plaza Public Water ATM dispensed 56 reusable refills', time: '14s ago', type: 'refill' },
+  { text: 'Sukhna Lake Sensor Node 01: pH 7.4 baseline verified', time: '28s ago', type: 'sensor' },
+  { text: 'PPCB Field Unit resolved turbidity advisory #AQUA-1042 (Sector 35)', time: '1m ago', type: 'dispatch' },
+  { text: 'Mohali Eco-Club pledged to monitor N-Choe Drainage Stream', time: '2m ago', type: 'adopt' }
 ];
 
 export const LiveCommunityTicker = () => {
@@ -67,10 +67,10 @@ export const LiveCommunityTicker = () => {
           </div>
           <div>
             <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 block">
-              Continuous Clean Gallons Verified
+              Continuous Clean Litres Verified
             </span>
             <div className="text-xl font-bold text-zinc-900 font-mono tracking-tight">
-              {gallonsMonitored.toLocaleString()} gal
+              {gallonsMonitored.toLocaleString()} L
             </div>
           </div>
         </div>

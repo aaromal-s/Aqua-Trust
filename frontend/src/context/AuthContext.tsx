@@ -17,15 +17,15 @@ interface AuthContextType {
 
 const mockAdmin: User = {
   id: 'admin-1',
-  name: 'Global Administrator',
+  name: 'PPCB & MC Chandigarh Admin',
   role: 'admin',
 };
 
 const mockUser: User = {
   id: 'user-1',
-  name: 'John Doe',
+  name: 'Gurpreet Singh',
   role: 'user',
-  systemName: 'Sector 4 Residential Unit',
+  systemName: 'Sector 35-B Residential Grid, Chandigarh',
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);

@@ -21,11 +21,11 @@ export const Layout = () => {
     if (!isAdmin) return;
 
     const messages = [
-      "pH spike detected in Sector 7",
-      "Turbidity anomaly in River North",
-      "Sensor AQ-014 telemetry synced",
-      "Compliance report successfully generated",
-      "Predictive AI model recalibrated"
+      "pH deviation detected in Sector 17 grid",
+      "Turbidity & silt surge in Sukhna Lake Catchment",
+      "Sensor AQ-CHD-01 (Sukhna Node) telemetry synced",
+      "PPCB Compliance audit log successfully generated",
+      "Kajauli Bhakra feeder AI predictive model recalibrated"
     ];
     
     const interval = setInterval(() => {

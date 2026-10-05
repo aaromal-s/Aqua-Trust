@@ -105,10 +105,10 @@ const Dashboard = () => {
           <div className="card flex flex-col h-[400px]">
             <h3 className="font-semibold mb-4 text-lg">Recent Anomalies</h3>
             <div className="flex-1 flex flex-col gap-3 overflow-y-auto pr-2 custom-scrollbar">
-              <AlertItem type="critical" location="Station AQ-014" message="Unusual turbidity spike detected (11.8 NTU)" time="14m ago" />
-              <AlertItem type="warning" location="River North" message="pH level dropping gradually (Current: 6.8)" time="1h ago" />
-              <AlertItem type="info" location="Station AQ-003" message="Sensor calibration recommended" time="3h ago" />
-              <AlertItem type="warning" location="Estuary South" message="Low Dissolved Oxygen detected (5.2 mg/L)" time="5h ago" />
+              <AlertItem type="critical" location="Budha Nullah (Ludhiana)" message="Industrial chemical & turbidity spike (14.2 NTU)" time="14m ago" />
+              <AlertItem type="warning" location="Sukhna Lake (Sector 1)" message="Catchment run-off causing slight pH deviation (Current: 6.8)" time="1h ago" />
+              <AlertItem type="info" location="Kajauli Waterworks (Sector 39)" message="Routine spectrophotometer sensor calibration recommended" time="3h ago" />
+              <AlertItem type="warning" location="Harike Wetland Sanctuary" message="Seasonal low Dissolved Oxygen reading (5.2 mg/L)" time="5h ago" />
             </div>
           </div>
         </div>
@@ -128,7 +128,7 @@ const Dashboard = () => {
                 </span>
               </div>
               <p className="text-zinc-800 font-medium text-lg leading-relaxed">
-                Based on current telemetry, there is a <span className="font-bold text-red-500">78% probability</span> of a turbidity spike in Estuary South within the next 4 hours.
+                Based on current telemetry, there is a <span className="font-bold text-red-500">78% probability</span> of industrial effluent surge reaching the Sutlej Confluence from Budha Nullah within the next 4 hours.
               </p>
             </div>
             <div className="shrink-0 flex gap-3 w-full md:w-auto">

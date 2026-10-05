@@ -27,20 +27,22 @@ interface MapPoint {
 
 const mapPoints: MapPoint[] = [
   // Sensors
-  { id: 'AQ-001', name: 'River North Aqueduct', category: 'sensor', lat: 51.505, lng: -0.09, status: 'safe', details: 'Continuous municipal sensor telemetry', pH: 7.2, turbidity: 4.5, extraInfo: 'Drinkable: Yes' },
-  { id: 'AQ-014', name: 'Lake East Main Sensor', category: 'sensor', lat: 51.51, lng: -0.1, status: 'warning', details: 'High mineral activity detected', pH: 6.8, turbidity: 8.9, extraInfo: 'Drinkable: Boil first' },
-  { id: 'AQ-022', name: 'Estuary South Drainage', category: 'sensor', lat: 51.49, lng: -0.08, status: 'critical', details: 'Elevated chemical runoff', pH: 5.5, turbidity: 15.2, extraInfo: 'Drinkable: No' },
+  { id: 'AQ-001', name: 'Sukhna Lake (Sector 1, Chandigarh)', category: 'sensor', lat: 30.7421, lng: 76.8188, status: 'safe', details: 'Continuous watershed & reservoir monitoring fed by Shivalik streams.', pH: 7.4, turbidity: 2.1, extraInfo: 'Drinkable: With municipal treatment' },
+  { id: 'AQ-014', name: 'Kajauli Waterworks Line (Sector 39)', category: 'sensor', lat: 30.7300, lng: 76.7410, status: 'safe', details: 'Bhakra canal drinking supply pipeline for Chandigarh & Mohali grid.', pH: 7.2, turbidity: 1.2, extraInfo: 'Drinkable: 100% BIS 10500 Compliant' },
+  { id: 'AQ-022', name: 'N-Choe Rivulet (Sector 42 Ecological Zone)', category: 'sensor', lat: 30.7250, lng: 76.7620, status: 'warning', details: 'Seasonal stormwater rivulet passing through southern Chandigarh sectors.', pH: 6.8, turbidity: 6.8, extraInfo: 'Ecological corridor: Non-potable' },
+  { id: 'AQ-035', name: 'Budha Nullah Inflow (Ludhiana Industrial Zone)', category: 'sensor', lat: 30.9120, lng: 75.8350, status: 'critical', details: 'PPCB Alert: High textile dyeing and chemical effluent near Sutlej confluence.', pH: 5.2, turbidity: 22.4, extraInfo: 'Critical Hazard: Direct contact prohibited' },
+  { id: 'AQ-040', name: 'Harike Pattan Wetland Sanctuary (Punjab)', category: 'sensor', lat: 31.1500, lng: 74.9500, status: 'safe', details: 'Ramsar International Wetland at Beas-Sutlej river confluence.', pH: 7.6, turbidity: 3.4, extraInfo: 'Indus Dolphin Habitat: Safe' },
   
   // Public Drinking Water & Refill Stations
-  { id: 'REF-01', name: 'City Hall Public Refill Fountain', category: 'drinking_station', lat: 51.508, lng: -0.085, status: 'safe', details: 'Free UV-purified chilled tap water', extraInfo: '14,200 plastic bottles saved' },
-  { id: 'REF-02', name: 'Metro Plaza Water ATM', category: 'drinking_station', lat: 51.502, lng: -0.095, status: 'safe', details: 'Reverse Osmosis public refill kiosk', extraInfo: '9,840 plastic bottles saved' },
+  { id: 'REF-01', name: 'Sector 17 Plaza Public Water ATM (Chandigarh)', category: 'drinking_station', lat: 30.7398, lng: 76.7827, status: 'safe', details: 'Municipal Corporation 4-stage RO chilled public drinking water kiosk.', extraInfo: '18,400 plastic bottles saved' },
+  { id: 'REF-02', name: 'ISBT Sector 43 Water ATM Kiosk', category: 'drinking_station', lat: 30.7180, lng: 76.7490, status: 'safe', details: 'High-capacity UV-purified free tap refill for interstate travelers.', extraInfo: '12,850 plastic bottles saved' },
   
   // Recreational Water (Swimming / Boating)
-  { id: 'REC-01', name: 'Lake East Public Beach & Pier', category: 'recreational', lat: 51.514, lng: -0.098, status: 'safe', details: 'Safe for open water swimming and paddle boarding', extraInfo: 'Bacterial counts: Safe' },
-  { id: 'REC-02', name: 'Pine Creek Canoe Launch', category: 'recreational', lat: 51.495, lng: -0.105, status: 'warning', details: 'Caution: Moderate turbidity after rainfall', extraInfo: 'Life jackets recommended' },
+  { id: 'REC-01', name: 'Sukhna Lake Boating & Promenade Pier', category: 'recreational', lat: 30.7445, lng: 76.8140, status: 'safe', details: 'Designated safe recreational waters for rowing, kayaking, and tourism.', extraInfo: 'Recreational Health: Optimal' },
+  { id: 'REC-02', name: 'Ropar Wetland Eco-Reserve (Sutlej Bank)', category: 'recreational', lat: 30.9700, lng: 76.5300, status: 'safe', details: 'Protected freshwater wetland and migratory waterfowl sanctuary.', extraInfo: 'Bacterial counts: Safe' },
   
   // Citizen Hazard Sighting
-  { id: 'HAZ-01', name: 'South Canal Debris Sighting', category: 'hazard', lat: 51.492, lng: -0.075, status: 'critical', details: 'Reported by citizen #AQUA-1039: Iridescent oily sheen', extraInfo: 'Municipal cleanup dispatched' }
+  { id: 'HAZ-01', name: 'Ghaggar River Effluent Sighting (Near Dera Bassi)', category: 'hazard', lat: 30.5850, lng: 76.8400, status: 'critical', details: 'Reported by citizen #AQUA-1039: Frothing chemical discharge observed.', extraInfo: 'PPCB field inspection team dispatched' }
 ];
 
 const getStatusColor = (status: string) => {
@@ -119,8 +121,8 @@ export const WaterMap = () => {
       {/* Leaflet Map */}
       <div className="flex-1 w-full relative z-0">
         <MapContainer 
-          center={[51.505, -0.09]} 
-          zoom={13} 
+          center={[30.7333, 76.7794]} 
+          zoom={12} 
           style={{ height: '100%', width: '100%' }}
           className="z-0"
         >

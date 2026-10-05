@@ -21,8 +21,8 @@ export const WaterCalculator = () => {
   const totalDailyGallons = Math.round(dailyShowerGallons + dailyToiletGallons + dailyLawnGallons + dailyLaundryGallons + dailyKitchenTapGallons);
   const totalMonthlyGallons = totalDailyGallons * 30;
   const totalMonthlyLiters = Math.round(totalMonthlyGallons * 3.78541);
-  const estimatedMonthlyBill = Math.round((totalMonthlyGallons / 1000) * 11.5); // ~$11.50 per 1k gal avg
-  const potentialSavings = fixtureAge === 'older' ? Math.round(estimatedMonthlyBill * 0.32) : Math.round(estimatedMonthlyBill * 0.12);
+  const estimatedMonthlyBill = Math.round((totalMonthlyLiters / 1000) * 12); // ~₹12 per kilolitre MC Chandigarh / Punjab tariff
+  const potentialSavings = fixtureAge === 'older' ? Math.round(estimatedMonthlyBill * 0.35) : Math.round(estimatedMonthlyBill * 0.15);
 
   return (
     <div className="flex-1 flex flex-col overflow-hidden bg-[var(--background)]">
@@ -55,8 +55,8 @@ export const WaterCalculator = () => {
             <div className="flex items-center gap-4 bg-white/10 p-4 rounded-xl backdrop-blur-md border border-white/20">
               <div className="text-right">
                 <span className="text-xs text-blue-200 uppercase font-bold block">Estimated Monthly Use</span>
-                <span className="text-2xl font-bold text-white">{totalMonthlyGallons.toLocaleString()} gal</span>
-                <span className="text-[11px] text-blue-200 block">({totalMonthlyLiters.toLocaleString()} L)</span>
+                <span className="text-2xl font-bold text-white">{totalMonthlyLiters.toLocaleString()} L</span>
+                <span className="text-[11px] text-blue-200 block">({totalMonthlyGallons.toLocaleString()} gal)</span>
               </div>
             </div>
           </div>
@@ -214,13 +214,13 @@ export const WaterCalculator = () => {
                 <div className="grid grid-cols-2 gap-3">
                   <div className="p-3 bg-zinc-50 rounded-xl border border-zinc-100">
                     <span className="text-[10px] font-bold uppercase text-zinc-400 block mb-1">Est. Monthly Bill</span>
-                    <span className="text-2xl font-bold text-zinc-900">${estimatedMonthlyBill}</span>
-                    <span className="text-[10px] text-zinc-500 block mt-0.5">Municipal water & sewer</span>
+                    <span className="text-2xl font-bold text-zinc-900">₹{estimatedMonthlyBill}</span>
+                    <span className="text-[10px] text-zinc-500 block mt-0.5">MC Chandigarh water tariff</span>
                   </div>
 
                   <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-100">
                     <span className="text-[10px] font-bold uppercase text-emerald-600 block mb-1">Potential Savings</span>
-                    <span className="text-2xl font-bold text-emerald-700">${potentialSavings}/mo</span>
+                    <span className="text-2xl font-bold text-emerald-700">₹{potentialSavings}/mo</span>
                     <span className="text-[10px] text-emerald-800 block mt-0.5">With low-flow aerators</span>
                   </div>
                 </div>
@@ -240,7 +240,7 @@ export const WaterCalculator = () => {
                     />
                   </div>
                   <p className="text-[11px] text-zinc-500 mt-2">
-                    Target baseline for a family of {people} is approx. {people * 55 * 30} gallons/month.
+                    Target baseline for a family of {people} is approx. {Math.round(people * 150 * 30).toLocaleString()} Litres/month (150 LPCD urban benchmark).
                   </p>
                 </div>
               </div>

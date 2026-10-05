@@ -7,40 +7,40 @@ interface EmergencyDirectoryModalProps {
 
 const emergencyContacts = [
   {
-    title: '24/7 Municipal Main Break & Contamination Dispatch',
-    number: '1-800-278-2767',
-    formatted: '(800) AQUA-SOS',
+    title: 'Municipal Corporation Chandigarh 24/7 Water Supply Cell',
+    number: '0172-2787200',
+    formatted: '0172-2787200 / Toll-Free 155304',
     hours: '24 Hours / 7 Days a Week',
-    desc: 'For immediate water main bursts, sewage backflow, or sudden severe discoloration across neighborhood pipelines.',
-    badge: 'Immediate Dispatch',
+    desc: 'For immediate Chandigarh water pipeline bursts, low pressure, dirty water supply, or sector-level water tanker requests.',
+    badge: 'MC Chandigarh',
     badgeColor: 'bg-rose-100 text-rose-800'
   },
   {
-    title: 'Hazardous Chemical & Oil Spill Response Center',
-    number: '1-800-424-8802',
-    formatted: '(800) 424-8802',
-    hours: 'Immediate Federal / State Response',
-    desc: 'To report petroleum sheens, illegal industrial dumping into rivers, lakes, storm drains, or coastal canals.',
-    badge: 'Environmental Police',
+    title: 'DWSS Punjab 24/7 Citizen Water Grievance Helpline',
+    number: '1800-180-2468',
+    formatted: '1800-180-2468 (Toll Free)',
+    hours: 'Round-the-Clock State Dispatch',
+    desc: 'Department of Water Supply & Sanitation Punjab for rural & urban piped water supply breakdowns and contamination notices.',
+    badge: 'DWSS Punjab',
+    badgeColor: 'bg-blue-100 text-blue-800'
+  },
+  {
+    title: 'Punjab Pollution Control Board (PPCB) Spill Control',
+    number: '0175-2215793',
+    formatted: '0175-2215793 (Head Office Patiala)',
+    hours: 'Emergency Environmental Squad',
+    desc: 'To report illegal industrial effluent dumping in Budha Nullah, Sutlej, Beas, Ghaggar, or storm canals.',
+    badge: 'PPCB Enforcement',
     badgeColor: 'bg-amber-100 text-amber-800'
   },
   {
-    title: 'National Poison Control Center (Ingestion Triage)',
-    number: '1-800-222-1222',
-    formatted: '(800) 222-1222',
-    hours: '24/7 Medical Professionals On-Call',
-    desc: 'If anyone in your household accidentally consumed water suspected of heavy chemical or microbial poisoning.',
+    title: 'PGIMER Chandigarh National Poison & Toxicology Center',
+    number: '0172-2756565',
+    formatted: '0172-2756565 / Emergency 112',
+    hours: '24/7 Medical Toxicologists On-Call',
+    desc: 'Emergency medical triage if suspect groundwater, industrial toxins, or pesticide runoff was accidentally ingested.',
     badge: 'Medical Emergency',
     badgeColor: 'bg-red-100 text-red-800'
-  },
-  {
-    title: 'Public Health Department Boil Water Inquiry Desk',
-    number: '1-888-555-7233',
-    formatted: '(888) 555-SAFE',
-    hours: 'Mon-Sun: 6:00 AM - 10:00 PM',
-    desc: 'To verify active boil water notices, school closure advisories, and free clean water distribution pickup points.',
-    badge: 'Advisory Verification',
-    badgeColor: 'bg-blue-100 text-blue-800'
   }
 ];
 

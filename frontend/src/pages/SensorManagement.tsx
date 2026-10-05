@@ -1,10 +1,11 @@
 import { Cpu, Search, Filter, Signal, Battery, ShieldAlert, CheckCircle2 } from 'lucide-react';
 
 const sensors = [
-  { id: 'AQ-001', location: 'River North', type: 'Multiparameter Sonde', status: 'ONLINE', battery: 92, signal: 'STRONG', lastSync: '2m ago' },
-  { id: 'AQ-014', location: 'Lake East', type: 'Multiparameter Sonde', status: 'WARNING', battery: 45, signal: 'WEAK', lastSync: '14m ago' },
-  { id: 'AQ-022', location: 'Estuary South', type: 'Heavy Metals Probe', status: 'OFFLINE', battery: 0, signal: 'NONE', lastSync: '12h ago' },
-  { id: 'AQ-035', location: 'Reservoir West', type: 'Biological Sensor', status: 'ONLINE', battery: 88, signal: 'STRONG', lastSync: '1m ago' },
+  { id: 'AQ-CHD-01', location: 'Sukhna Lake (Sector 1, Chandigarh)', type: 'Multiparameter Sonde', status: 'ONLINE', battery: 92, signal: 'STRONG', lastSync: '2m ago' },
+  { id: 'AQ-CHD-02', location: 'Kajauli Waterworks (Sector 39 Grid)', type: 'Turbidity & Fluoride Sonde', status: 'ONLINE', battery: 88, signal: 'STRONG', lastSync: '1m ago' },
+  { id: 'AQ-LUD-01', location: 'Budha Nullah (Ludhiana Industrial)', type: 'Toxic Effluents & Heavy Metals', status: 'WARNING', battery: 45, signal: 'WEAK', lastSync: '14m ago' },
+  { id: 'AQ-PB-03', location: 'Harike Pattan Wetland (Tarn Taran)', type: 'Bio-Sonde & Nitrates Probe', status: 'ONLINE', battery: 79, signal: 'STRONG', lastSync: '5m ago' },
+  { id: 'AQ-BTI-01', location: 'Bathinda Malwa Deep Aquifer', type: 'Uranium & TDS Spectrometer', status: 'OFFLINE', battery: 12, signal: 'NONE', lastSync: '12h ago' },
 ];
 
 const SensorManagement = () => {

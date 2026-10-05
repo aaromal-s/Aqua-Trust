@@ -10,8 +10,8 @@ interface IoTSimulatorModalProps {
 const scenarios = [
   {
     id: 'normal',
-    name: 'Normal WHO Baseline',
-    desc: 'Pure, safe drinking parameters across all physical and chemical sensors.',
+    name: 'Normal BIS 10500 Baseline',
+    desc: 'Pure, safe drinking parameters across Punjab & Chandigarh municipal water grid.',
     pH: 7.3,
     turbidity: 0.9,
     chlorine: 0.8,
@@ -20,18 +20,18 @@ const scenarios = [
   },
   {
     id: 'acid',
-    name: 'Acid Chemical Dump Incident',
-    desc: 'Simulate industrial acid discharge causing pH to plummet below safe threshold.',
+    name: 'Budha Nullah Industrial Effluent Dump',
+    desc: 'Simulate industrial textile and dye chemical discharge in Ludhiana causing pH and oxygen shock.',
     pH: 4.8,
-    turbidity: 6.8,
+    turbidity: 18.8,
     chlorine: 0.1,
     temp: 24.2,
     status: 'critical'
   },
   {
     id: 'sediment',
-    name: 'Stormwater Sediment Surge',
-    desc: 'Simulate severe mud and silt runoff after heavy precipitation upstream.',
+    name: 'Monsoon Silt Runoff (Sukhna Catchment)',
+    desc: 'Simulate severe mud and sediment inflow after Shivalik foothill downpour.',
     pH: 6.7,
     turbidity: 22.4,
     chlorine: 0.3,
@@ -40,8 +40,8 @@ const scenarios = [
   },
   {
     id: 'algae',
-    name: 'Cyanobacteria Algae Bloom',
-    desc: 'Warm stagnant conditions triggering high organic turbidity and oxygen depletion.',
+    name: 'Harike Wetland Cyanobacteria Bloom',
+    desc: 'Warm stagnant conditions triggering high organic turbidity and biological oxygen depletion.',
     pH: 8.8,
     turbidity: 16.5,
     chlorine: 0.0,
@@ -129,9 +129,10 @@ export const IoTSimulatorModal = ({ isOpen, onClose, onSimulationTriggered }: Io
                 onChange={(e) => setStationId(e.target.value)}
                 className="w-full p-2.5 text-xs bg-zinc-50 border border-zinc-200 rounded-xl text-zinc-800 focus:outline-none focus:border-blue-500 font-semibold"
               >
-                <option value="AQ-001">AQ-001 (River North Aqueduct)</option>
-                <option value="AQ-014">AQ-014 (Lake East Reservoir)</option>
-                <option value="AQ-022">AQ-022 (Estuary South Canal)</option>
+                <option value="AQ-CHD-01">AQ-CHD-01 (Sukhna Lake Sector 1, Chandigarh)</option>
+                <option value="AQ-CHD-02">AQ-CHD-02 (Kajauli Waterworks Sector 39)</option>
+                <option value="AQ-LUD-01">AQ-LUD-01 (Budha Nullah Industrial, Ludhiana)</option>
+                <option value="AQ-PB-03">AQ-PB-03 (Harike Pattan Wetland Reserve)</option>
               </select>
             </div>
 
