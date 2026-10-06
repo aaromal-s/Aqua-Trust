@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { MessageSquare, Camera, MapPin, Send, CheckCircle2, Search, Clock, ThumbsUp, ShieldAlert, Sparkles } from 'lucide-react';
 
 interface IncidentReport {
@@ -60,6 +61,7 @@ const initialReports: IncidentReport[] = [
 ];
 
 export const CitizenReporting = () => {
+  const routeLocation = useLocation();
   const [activeTab, setActiveTab] = useState<'submit' | 'feed'>('submit');
   const [reports, setReports] = useState<IncidentReport[]>(initialReports);
   const [submittedReportId, setSubmittedReportId] = useState<string | null>(null);
@@ -67,8 +69,8 @@ export const CitizenReporting = () => {
   // Form State
   const [issueType, setIssueType] = useState('color');
   const [location, setLocation] = useState('');
-  const [description, setDescription] = useState('');
-  const [severity, setSeverity] = useState<'low' | 'medium' | 'high'>('medium');
+  const [description, setDescription] = useState(routeLocation.state?.prefillDescription || '');
+  const [severity, setSeverity] = useState<'low' | 'medium' | 'high'>(routeLocation.state?.prefillSeverity || 'medium');
   const [isDetectingLocation, setIsDetectingLocation] = useState(false);
 
   // Search & Track State

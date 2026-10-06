@@ -298,10 +298,25 @@ export const WaterDoctor = () => {
                   {/* Action Handlers */}
                   <div className="pt-4 border-t border-zinc-100 space-y-2">
                     <button
-                      onClick={() => navigate('/reporting')}
-                      className="w-full py-2.5 px-4 rounded-xl bg-zinc-900 text-white text-xs font-semibold hover:bg-zinc-800 transition-colors flex items-center justify-center gap-2"
+                      onClick={() => navigate('/reporting', {
+                        state: {
+                          prefillDescription: `[Aqua Doctor Diagnosis]: ${result.title}. Cause: ${result.cause}. Recommended Action: ${result.advice.join('; ')}`,
+                          prefillSeverity: result.severity
+                        }
+                      })}
+                      className="w-full py-2.5 px-4 rounded-xl bg-zinc-900 text-white text-xs font-semibold hover:bg-zinc-800 transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
                     >
                       <Send className="w-3.5 h-3.5" /> File Report to Municipal Water Desk
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard.writeText(`AquaTrust Diagnosis: ${result.title}\nSeverity: ${result.severity.toUpperCase()}\nCause: ${result.cause}\nAdvice:\n- ${result.advice.join('\n- ')}`);
+                        alert('Diagnosis copied to clipboard!');
+                      }}
+                      className="w-full py-2 px-3 rounded-xl bg-zinc-100 text-zinc-700 text-xs font-semibold hover:bg-zinc-200 transition-colors text-center cursor-pointer"
+                    >
+                      Copy Diagnostic Summary
                     </button>
                   </div>
 

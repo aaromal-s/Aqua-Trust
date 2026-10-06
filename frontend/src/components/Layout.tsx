@@ -4,7 +4,7 @@ import { Home, Droplets, Cpu, BrainCircuit, FileText, MessageSquare, ShieldAlert
 import CommandMenu from './CommandMenu';
 import EmergencyDirectoryModal from './EmergencyDirectoryModal';
 import IoTSimulatorModal from './IoTSimulatorModal';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/useAuth';
 
 export const Layout = () => {
   const location = useLocation();

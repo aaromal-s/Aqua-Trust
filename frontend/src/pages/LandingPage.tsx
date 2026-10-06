@@ -20,6 +20,8 @@ const waterBodiesToAdopt = [
   { name: 'Budha Nullah Clean Stream Initiative (Ludhiana)', stewards: '56 Active Stewards', status: 'Active Bioremediation Watch', healthScore: '54%' },
 ];
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 export const LandingPage = () => {
   const [adoptedBodies, setAdoptedBodies] = useState<string[]>([]);
 
@@ -340,7 +342,7 @@ export const LandingPage = () => {
           </div>
           
           <div className="text-xs text-zinc-400">
-            © {new Date().getFullYear()} AquaTrust Open Environmental Network.
+            © {CURRENT_YEAR} AquaTrust Open Environmental Network.
           </div>
         </div>
       </footer>

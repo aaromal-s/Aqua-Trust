@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Cpu, Send, CheckCircle2, X, RefreshCw } from 'lucide-react';
+import { Cpu, Send, CheckCircle2, X, RefreshCw, Radio } from 'lucide-react';
+import { ingestTelemetry } from '../services/api';
 
 interface IoTSimulatorModalProps {
   isOpen: boolean;
@@ -57,9 +58,11 @@ export const IoTSimulatorModal = ({ isOpen, onClose, onSimulationTriggered }: Io
   const [isTransmitting, setIsTransmitting] = useState(false);
   const [successPayload, setSuccessPayload] = useState<string | null>(null);
 
+  const [ingestMode, setIngestMode] = useState<'live' | 'local'>('local');
+
   if (!isOpen) return null;
 
-  const handleTransmit = () => {
+  const handleTransmit = async () => {
     setIsTransmitting(true);
     setSuccessPayload(null);
 
@@ -76,16 +79,21 @@ export const IoTSimulatorModal = ({ isOpen, onClose, onSimulationTriggered }: Io
         battery_pct: 94,
         signal_rssi: -68
       },
-      status_flag: selectedScenario.status
+      status_flag: selectedScenario.status as 'safe' | 'warning' | 'critical'
     };
 
-    setTimeout(() => {
-      setIsTransmitting(false);
-      setSuccessPayload(JSON.stringify(payload, null, 2));
+    try {
+      const result = await ingestTelemetry(payload);
+      setIngestMode(result.mode);
+      setSuccessPayload(JSON.stringify(result.data, null, 2));
       if (onSimulationTriggered) {
         onSimulationTriggered(payload);
       }
-    }, 700);
+    } catch {
+      setSuccessPayload(JSON.stringify(payload, null, 2));
+    } finally {
+      setIsTransmitting(false);
+    }
   };
 
   return (
@@ -219,9 +227,11 @@ export const IoTSimulatorModal = ({ isOpen, onClose, onSimulationTriggered }: Io
             <div className="card !p-4 bg-zinc-950 text-white rounded-xl font-mono text-xs space-y-2 border border-zinc-800">
               <div className="flex items-center justify-between text-zinc-400 text-[11px] pb-1 border-b border-zinc-800">
                 <span className="flex items-center gap-1.5 text-emerald-400 font-bold">
-                  <CheckCircle2 className="w-3.5 h-3.5" /> 200 OK — Telemetry Ingested
+                  <CheckCircle2 className="w-3.5 h-3.5" /> {ingestMode === 'live' ? '200 OK — Live Backend Ingested' : '200 OK — Ingested (Local Grid)'}
                 </span>
-                <span>Payload: 48 bytes</span>
+                <span className="flex items-center gap-1 text-[10px] text-zinc-500">
+                  <Radio className="w-3 h-3 text-emerald-500" /> NB-IoT / MQTT
+                </span>
               </div>
               <pre className="text-zinc-300 text-[11px] overflow-x-auto p-2 bg-black/50 rounded-lg">
                 {successPayload}

@@ -33,19 +33,22 @@ app.get('/api/status', (req, res) => {
 const startServer = async () => {
   try {
     const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/aqua-trust';
-    console.log(`Attempting to connect to MongoDB at ${mongoUri}...`);
-    
-    try {
-      await mongoose.connect(mongoUri);
-      console.log(`MongoDB Connected Successfully`);
-    } catch (dbError) {
-      console.warn(`\n⚠️ WARNING: Could not connect to MongoDB (is it running?).`);
-      console.warn(`Starting backend API anyway, but database-dependent features may fail. Mock endpoints will still work.\n`);
-    }
-    
+
+    // Start listening immediately so API and mock endpoints are instant (< 200ms)
     app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
+      console.log(`🚀 AquaTrust Core API server running on port ${PORT}`);
     });
+
+    // Attempt MongoDB connection in background with short timeout so server does not hang
+    console.log(`Connecting to MongoDB at ${mongoUri}...`);
+    mongoose.connect(mongoUri, { serverSelectionTimeoutMS: 2500 })
+      .then(() => {
+        console.log(`✅ MongoDB Connected Successfully`);
+      })
+      .catch((dbError) => {
+        console.warn(`\n⚠️ Note: MongoDB not detected locally or timed out.`);
+        console.warn(`Running backend API in resilient mock/in-memory fallback mode.\n`);
+      });
   } catch (error) {
     console.error(`Fatal Server Error:`, error);
     process.exit(1);

@@ -1,20 +1,9 @@
-import { createContext, useContext, useState } from 'react';
+import { useState } from 'react';
 import type { ReactNode } from 'react';
+import { AuthContext } from './authContextDef';
+import type { User, Role } from './authContextDef';
 
-type Role = 'admin' | 'user';
-
-interface User {
-  id: string;
-  name: string;
-  role: Role;
-  systemName?: string;
-}
-
-interface AuthContextType {
-  currentUser: User;
-  toggleRole: () => void;
-  setRole: (role: Role) => void;
-}
+export type { User, Role };
 
 const mockAdmin: User = {
   id: 'admin-1',
@@ -28,8 +17,6 @@ const mockUser: User = {
   role: 'user',
   systemName: 'Sector 35-B Residential Grid, Chandigarh',
 };
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<User>(mockAdmin);
@@ -47,12 +34,4 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
 };

@@ -69,6 +69,36 @@ export const WaterCalculator = () => {
               {/* Sliders Card */}
               <div className="card !p-6 bg-white border border-zinc-200 rounded-2xl shadow-sm space-y-6">
                 
+                {/* Presets */}
+                <div>
+                  <label className="text-xs font-bold uppercase tracking-wider text-zinc-500 block mb-2">
+                    Quick Household Presets
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      onClick={() => { setPeople(2); setShowerMinutes(8); setLawnWateringDays(0); setLaundryLoads(2); setFixtureAge('modern'); }}
+                      className="px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-xs font-semibold text-zinc-700 transition-colors"
+                    >
+                      2-Person Apartment
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => { setPeople(4); setShowerMinutes(10); setLawnWateringDays(2); setLaundryLoads(5); setFixtureAge('older'); }}
+                      className="px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-xs font-semibold text-zinc-700 transition-colors"
+                    >
+                      4-Person Family Home
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => { setPeople(5); setShowerMinutes(14); setLawnWateringDays(4); setLaundryLoads(7); setFixtureAge('modern'); }}
+                      className="px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-xs font-semibold text-zinc-700 transition-colors"
+                    >
+                      Villa with Garden Lawn
+                    </button>
+                  </div>
+                </div>
+
                 {/* 1. People in Home */}
                 <div>
                   <div className="flex justify-between items-center mb-2">
