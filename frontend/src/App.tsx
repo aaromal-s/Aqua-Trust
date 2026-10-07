@@ -16,6 +16,9 @@ const Login = lazy(() => import('./pages/Login'));
 const Register = lazy(() => import('./pages/Register'));
 const WaterDoctor = lazy(() => import('./pages/WaterDoctor'));
 const WaterCalculator = lazy(() => import('./pages/WaterCalculator'));
+const WaterPassport = lazy(() => import('./pages/WaterPassport'));
+const WatershedSimulator = lazy(() => import('./pages/WatershedSimulator'));
+const TestStripScanner = lazy(() => import('./pages/TestStripScanner'));
 
 const PageLoader = () => (
   <div className="flex-1 min-h-[60vh] flex flex-col items-center justify-center p-8">
@@ -46,6 +49,9 @@ function App() {
               <Route path="/intelligence" element={<AquaIntelligence />} />
               <Route path="/doctor" element={<WaterDoctor />} />
               <Route path="/calculator" element={<WaterCalculator />} />
+              <Route path="/passport" element={<WaterPassport />} />
+              <Route path="/simulator" element={<WatershedSimulator />} />
+              <Route path="/scanner" element={<TestStripScanner />} />
               <Route path="/reporting" element={<CitizenReporting />} />
               <Route path="/reports" element={<Reports />} />
               <Route path="/admin" element={<AdminPanel />} />

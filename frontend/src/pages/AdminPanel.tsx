@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { Shield, Users, Settings, Server, AlertOctagon, CheckCircle2, X, ArrowRight, Save } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Shield, Users, Settings, Server, AlertOctagon, CheckCircle2, X, ArrowRight, Save, Truck, Plus, Check } from 'lucide-react';
+import { fetchWorkOrders, dispatchWorkOrder, updateWorkOrderStatus, type MunicipalWorkOrder } from '../services/workOrderService';
 
 interface AdminUser {
   id: string;
@@ -25,7 +26,57 @@ const mockLogs = [
 ];
 
 export const AdminPanel = () => {
-  const [activeModule, setActiveModule] = useState<'users' | 'thresholds' | 'logs' | 'triage' | null>(null);
+  const [activeModule, setActiveModule] = useState<'users' | 'thresholds' | 'logs' | 'triage' | 'workorders' | null>(null);
+  
+  // Work Orders state
+  const [workOrders, setWorkOrders] = useState<MunicipalWorkOrder[]>([]);
+  const [newOrderIncidentRef, setNewOrderIncidentRef] = useState('');
+  const [newOrderTitle, setNewOrderTitle] = useState('');
+  const [newOrderTeam, setNewOrderTeam] = useState('PPCB Rapid Response Unit 1');
+  const [newOrderPriority, setNewOrderPriority] = useState<MunicipalWorkOrder['priority']>('HIGH');
+  const [newOrderLocation, setNewOrderLocation] = useState('Sukhna Lake Shoreline');
+  const [isDispatching, setIsDispatching] = useState(false);
+
+  useEffect(() => {
+    loadWorkOrders();
+  }, []);
+
+  const loadWorkOrders = async () => {
+    const data = await fetchWorkOrders();
+    setWorkOrders(data);
+  };
+
+  const handleCreateWorkOrder = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsDispatching(true);
+    const created = await dispatchWorkOrder({
+      incidentRef: newOrderIncidentRef || 'AQUA-1045',
+      title: newOrderTitle || 'Water Pipeline Pressure Flush',
+      assignedTeam: newOrderTeam,
+      priority: newOrderPriority,
+      location: newOrderLocation,
+      slaHoursLimit: newOrderPriority === 'EMERGENCY' ? 12 : 24,
+      leadOfficer: 'Er. Jaswinder Singh (PPCB Field Lead)'
+    });
+    setWorkOrders(prev => [created, ...prev]);
+    setIsDispatching(false);
+    setNewOrderTitle('');
+    setNewOrderIncidentRef('');
+  };
+
+  const handleUpdateWorkOrderStatus = async (id: string, status: MunicipalWorkOrder['status']) => {
+    await updateWorkOrderStatus(id, {
+      status,
+      afterEvidenceNote: status === 'RESOLVED_VERIFIED' ? 'Field remediation completed. Samples verified within BIS 10500 limits.' : undefined,
+      postCleanupReading: status === 'RESOLVED_VERIFIED' ? {
+        pH: 7.2,
+        turbidity_ntu: 0.8,
+        dissolvedOxygen_mgL: 7.4,
+        verifiedByBadge: 'PPCB-INSP-204'
+      } : undefined
+    });
+    await loadWorkOrders();
+  };
   
   // Users state
   const [users, setUsers] = useState<AdminUser[]>(initialUsers);
@@ -113,7 +164,7 @@ export const AdminPanel = () => {
         <div>
           <h3 className="text-sm font-bold text-zinc-800 uppercase tracking-wider mb-4">Core Administration Systems</h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
             <AdminModuleCard 
               title="User & Access Management" 
               desc="Configure roles, authentication rights, and field officer access." 
@@ -137,6 +188,12 @@ export const AdminPanel = () => {
               desc="Review, verify, and dispatch remediation teams for citizen reports." 
               icon={<AlertOctagon className="w-5 h-5 text-amber-600" />}
               onClick={() => setActiveModule('triage')}
+            />
+            <AdminModuleCard 
+              title="Municipal Work Orders & SLA" 
+              desc="Field team dispatch, SLA countdown, and before/after verification." 
+              icon={<Truck className="w-5 h-5 text-teal-600" />}
+              onClick={() => setActiveModule('workorders')}
             />
           </div>
         </div>
@@ -356,6 +413,166 @@ export const AdminPanel = () => {
             <div className="pt-2 border-t border-zinc-100 flex justify-end">
               <button onClick={() => setActiveModule(null)} className="px-4 py-2 rounded-xl bg-zinc-900 text-white text-xs font-semibold">
                 Close Triage
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal 5: Municipal Field Work Orders & Dispatch */}
+      {activeModule === 'workorders' && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/50 backdrop-blur-sm animate-fade-in">
+          <div className="w-full max-w-4xl bg-white rounded-3xl shadow-2xl border border-zinc-200 overflow-hidden relative animate-spring-up p-6 space-y-5 max-h-[90vh] flex flex-col">
+            <div className="flex items-center justify-between pb-3 border-b border-zinc-100">
+              <div className="flex items-center gap-2.5">
+                <Truck className="w-5 h-5 text-teal-600" />
+                <div>
+                  <h3 className="text-base font-bold text-zinc-900">Municipal Work Orders & Field Dispatch Lifecycle</h3>
+                  <p className="text-xs text-zinc-500">Track rapid response crews, resolution SLA, and post-cleanup water testing verification</p>
+                </div>
+              </div>
+              <button onClick={() => setActiveModule(null)} className="text-zinc-400 hover:text-zinc-600">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Quick Dispatch Form */}
+            <form onSubmit={handleCreateWorkOrder} className="p-4 bg-zinc-50 rounded-2xl border border-zinc-200 space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-zinc-700 uppercase tracking-wider flex items-center gap-1.5">
+                  <Plus className="w-3.5 h-3.5 text-teal-600" /> Dispatch New Field Unit
+                </span>
+                <span className="text-[10px] text-zinc-400">PPCB & MC Chandigarh Co-ordination</span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-6 gap-2">
+                <input
+                  type="text"
+                  placeholder="Incident Ref"
+                  value={newOrderIncidentRef}
+                  onChange={(e) => setNewOrderIncidentRef(e.target.value)}
+                  className="px-2.5 py-2 bg-white border border-zinc-200 rounded-xl text-xs font-mono"
+                />
+                <input
+                  type="text"
+                  required
+                  placeholder="Task Title"
+                  value={newOrderTitle}
+                  onChange={(e) => setNewOrderTitle(e.target.value)}
+                  className="px-2.5 py-2 bg-white border border-zinc-200 rounded-xl text-xs"
+                />
+                <input
+                  type="text"
+                  placeholder="Location"
+                  value={newOrderLocation}
+                  onChange={(e) => setNewOrderLocation(e.target.value)}
+                  className="px-2.5 py-2 bg-white border border-zinc-200 rounded-xl text-xs"
+                />
+                <select
+                  value={newOrderTeam}
+                  onChange={(e) => setNewOrderTeam(e.target.value)}
+                  className="px-2 py-2 bg-white border border-zinc-200 rounded-xl text-xs"
+                >
+                  <option value="PPCB Rapid Response Unit 1">PPCB Rapid Response 1</option>
+                  <option value="MC Chandigarh Health Div-3">MC Chandigarh Health 3</option>
+                  <option value="Water Wing Rapid Line Services">Water Wing Rapid Line</option>
+                  <option value="Ludhiana Flying Squad">Ludhiana Flying Squad</option>
+                </select>
+                <select
+                  value={newOrderPriority}
+                  onChange={(e) => setNewOrderPriority(e.target.value as any)}
+                  className="px-2 py-2 bg-white border border-zinc-200 rounded-xl text-xs font-bold"
+                >
+                  <option value="EMERGENCY">EMERGENCY (12h)</option>
+                  <option value="HIGH">HIGH (24h)</option>
+                  <option value="MEDIUM">MEDIUM (48h)</option>
+                </select>
+                <button
+                  type="submit"
+                  disabled={isDispatching}
+                  className="px-3 py-2 bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs rounded-xl transition-all shadow-sm flex items-center justify-center gap-1"
+                >
+                  <Truck className="w-3.5 h-3.5" /> {isDispatching ? '...' : 'Dispatch'}
+                </button>
+              </div>
+            </form>
+
+            {/* Work Orders List */}
+            <div className="flex-1 overflow-y-auto space-y-3">
+              {workOrders.map(order => (
+                <div key={order.id} className="p-4 rounded-2xl border border-zinc-200 bg-white space-y-3 shadow-sm hover:border-teal-200 transition-all">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono text-xs font-bold text-zinc-900 bg-zinc-100 px-2 py-0.5 rounded-md">
+                        {order.id}
+                      </span>
+                      <span className="text-xs text-zinc-400 font-mono">Ref: {order.incidentRef}</span>
+                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                        order.priority === 'EMERGENCY' ? 'bg-rose-100 text-rose-800' :
+                        order.priority === 'HIGH' ? 'bg-amber-100 text-amber-800' : 'bg-blue-100 text-blue-800'
+                      }`}>
+                        {order.priority}
+                      </span>
+                    </div>
+
+                    <span className={`text-xs font-bold px-2.5 py-1 rounded-xl ${
+                      order.status === 'RESOLVED_VERIFIED' ? 'bg-emerald-100 text-emerald-800' :
+                      order.status === 'REMEDIATION_ACTIVE' ? 'bg-blue-100 text-blue-800' : 'bg-zinc-100 text-zinc-700'
+                    }`}>
+                      {order.status.replace(/_/g, ' ')}
+                    </span>
+                  </div>
+
+                  <div>
+                    <h4 className="text-sm font-bold text-zinc-900">{order.title}</h4>
+                    <p className="text-xs text-zinc-500">{order.location} • Lead: <span className="font-semibold text-zinc-700">{order.leadOfficer}</span> ({order.assignedTeam})</p>
+                  </div>
+
+                  <div className="p-3 bg-zinc-50 rounded-xl text-xs space-y-1">
+                    <p className="text-zinc-600"><span className="font-semibold text-zinc-800">Initial Finding:</span> {order.beforeEvidenceNote}</p>
+                    {order.afterEvidenceNote && (
+                      <p className="text-emerald-700"><span className="font-semibold">Remediation Proof:</span> {order.afterEvidenceNote}</p>
+                    )}
+                    {order.postCleanupReading && (
+                      <div className="pt-1 flex gap-3 text-[11px] font-mono text-emerald-800">
+                        <span>pH: {order.postCleanupReading.pH}</span>
+                        <span>Turbidity: {order.postCleanupReading.turbidity_ntu} NTU</span>
+                        <span>DO: {order.postCleanupReading.dissolvedOxygen_mgL} mg/L</span>
+                        <span>Badge: {order.postCleanupReading.verifiedByBadge}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Status Actions */}
+                  {order.status !== 'RESOLVED_VERIFIED' && (
+                    <div className="flex items-center justify-end gap-2 pt-1">
+                      <button
+                        onClick={() => handleUpdateWorkOrderStatus(order.id, 'ON_SITE_SAMPLING')}
+                        className="px-3 py-1 text-xs font-semibold bg-zinc-100 hover:bg-zinc-200 rounded-lg text-zinc-700"
+                      >
+                        Mark On-Site Sampling
+                      </button>
+                      <button
+                        onClick={() => handleUpdateWorkOrderStatus(order.id, 'REMEDIATION_ACTIVE')}
+                        className="px-3 py-1 text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-100"
+                      >
+                        Start Remediation
+                      </button>
+                      <button
+                        onClick={() => handleUpdateWorkOrderStatus(order.id, 'RESOLVED_VERIFIED')}
+                        className="px-3 py-1 text-xs font-bold bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 flex items-center gap-1"
+                      >
+                        <Check className="w-3.5 h-3.5" /> Verify & Close SLA
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <div className="pt-2 border-t border-zinc-100 flex justify-end">
+              <button onClick={() => setActiveModule(null)} className="px-4 py-2 rounded-xl bg-zinc-900 text-white text-xs font-semibold">
+                Close Work Orders
               </button>
             </div>
           </div>

@@ -8,6 +8,10 @@ import sensorRoutes from './routes/sensorRoutes';
 import authRoutes from './routes/authRoutes';
 import alertRoutes from './routes/alertRoutes';
 import locationRoutes from './routes/locationRoutes';
+import passportRoutes from './routes/passportRoutes';
+import simulatorRoutes from './routes/simulatorRoutes';
+import workOrderRoutes from './routes/workOrderRoutes';
+import notificationRoutes from './routes/notificationRoutes';
 
 dotenv.config();
 
@@ -23,6 +27,10 @@ app.use('/api/auth', authRoutes);
 app.use('/api/sensors', sensorRoutes);
 app.use('/api/alerts', alertRoutes);
 app.use('/api/locations', locationRoutes);
+app.use('/api/passport', passportRoutes);
+app.use('/api/simulator', simulatorRoutes);
+app.use('/api/work-orders', workOrderRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 // Root Status Route
 app.get('/api/status', (req, res) => {
